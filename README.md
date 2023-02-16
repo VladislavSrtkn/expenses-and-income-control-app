@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Redux Guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Что мы создаем? Приложение по контролю финансов.
 
-## Available Scripts
+Мы выбираем год (по умолчанию текущий)
+Мы выбираем месяц (по умолчанию текущий)
 
-In the project directory, you can run:
+Два инпута: сумма и описание, две кнопки (добавить расход / добавить доход)
+Далее - список операций, которые были занесены.
 
-### `npm start`
+Внизу тотал результат выбранного месяца (положительный или отрицательный баланс)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Фильтры для просмотра операций: только траты/только доходы/все операции
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Настройки - выбор валюты, темная тема (?)
 
-### `npm test`
+2. Действия redux:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- слайс операций: добавить запись, удалить запись, редактировать запись
+- слайс фильтров: тип операции: все/расходы/доходы , период: месяц (или лучше гибкие даты?)
+- определить: валюта
 
-### `npm run build`
+3. Установка пакетов:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `npx create-react-app`
+- `npm install @reduxjs/toolkit` (redux + toolkit)
+- `npm install react-redux `(связка redux-react для хуков и тп)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Создание слайсов:
+   Создаем файлы слайсов (operationsSlice и filtersSlice), прописываем функции и экспортируем в store.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Filters slice - создаем обычным образом (без адаптера).
+   Operations Slice - создаем с адаптером. Адаптер сам задает исхрдный state как объект с массивом id и свойством entities, в которых по ключу id хранятся объекты операций (в данном случае).
 
-### `npm run eject`
+   Используем стандартные функции адаптера для базовых операций: `operationAdded: operationsAdapter.addOne` и `operationDeleted: operationsAdapter.removeOne`.
+   Когда мы вызываем `operationAdded`, мы должны в качестве аргумента передать ей новый объект со свойством id - адаптер сам добавит id в массив id и объект в entities.
+   Когда мы вызываем `operationDeleted`, мы должны в качестве аргумента передать id удаляемого объекта (или массив ID) - адаптер так же сам удалит эти объекты из entities и ID из массива ID.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   Для функции с несколькими аргументами `operationChanged` используем конструкцию reducer/prepare:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - в prepare в аргументах перечисляем передаваемые значения и возвращаем объект со свойством payload, которое содержит объект с этими значениями.
+   - в reducer забираем эти значения из action.payload и используем их как нам нужно
+   - при вызове функции передаем аргументы в том же порядке, что устанавливали в `prepare`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. В store с помощью configureStore подключаем слайсы
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+6. В index.js исмпортиурем Provider, передаем ему store и оборачиваем в него наш App.
