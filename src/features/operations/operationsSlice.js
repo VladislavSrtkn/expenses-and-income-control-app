@@ -1,11 +1,11 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
 
 const operationsAdapter = createEntityAdapter();
 const initialState = operationsAdapter.getInitialState();
 
-export function saveNewOperation(text, amount, operationType, year, month) {
-  return { id: 0, text, amount, operationType, year, month };
+export function saveNewOperation(text, amount, type, year, month) {
+  const id = month * Math.random();
+  return { id, text, amount, type, year, month };
 }
 
 const operationsSlice = createSlice({

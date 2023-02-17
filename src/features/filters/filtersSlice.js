@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const typeFilters = {
   All: 'all',
   Income: 'income',
-  Expenses: 'expenses',
+  Expenses: 'expense',
 };
 
 const today = new Date();

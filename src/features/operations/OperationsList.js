@@ -1,8 +1,9 @@
 import { List, ListItem, ListItemText } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function OperationsList() {
   const filterDate = useSelector((state) => state.filters.date);
+  const filterType = useSelector((state) => state.filters.type);
   const { year, month } = filterDate;
 
   const operations = useSelector((state) => Object.values(state.operations.entities));
@@ -10,8 +11,9 @@ export default function OperationsList() {
   const selectedMonthOperations = operations.filter((operation) => {
     const matchedYear = operation.year === year;
     const matchedMonth = operation.month === month;
+    const matchedType = operation.type === filterType || filterType === 'all';
 
-    return matchedYear && matchedMonth;
+    return matchedYear && matchedMonth && matchedType;
   });
 
   const input = selectedMonthOperations.map((item) => (
