@@ -10,18 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.Salary {
-  background-color: #4daf3c;
+.income {
+  background-color: #5bab0b;
 }
-.Products {
-  background-color: #f3b619;
+
+.expense {
+  background-color: #5e61dfbd;
 }
-.Utilities {
-  background-color: #dd446c;
+
+.selectedCategory {
+  font-weight: bold;
 }
-.Clothes {
-  background-color: #058795;
-}
-/* .Unknown {
-  background-color: #757575;
-} */

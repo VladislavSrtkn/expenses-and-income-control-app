@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { currencies } from './currencies';
 
 export const typeFilters = {
   All: 'all',
@@ -9,7 +10,8 @@ export const typeFilters = {
 const today = new Date();
 
 const initialState = {
-  type: typeFilters.All,
+  type: typeFilters.Expenses,
+  currency: currencies.eur,
   date: {
     year: today.getFullYear(),
     month: today.getMonth(),
@@ -23,6 +25,9 @@ const filtersSlice = createSlice({
     typeFilterChanged(state, action) {
       state.type = action.payload;
     },
+    currencyChanged(state, action) {
+      state.currency = action.payload;
+    },
     dateFilterChanged(state, action) {
       const newDate = new Date(Date.parse(`${state.date.year}-${state.date.month + 1}`));
       const newMonth = action.payload;
@@ -34,6 +39,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { typeFilterChanged, dateFilterChanged } = filtersSlice.actions;
+export const { typeFilterChanged, dateFilterChanged, currencyChanged } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

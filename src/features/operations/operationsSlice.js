@@ -1,11 +1,12 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 
 const operationsAdapter = createEntityAdapter();
 const initialState = operationsAdapter.getInitialState();
 
-export function saveNewOperation(text, amount, type, year, month) {
-  const id = month * Math.random();
-  return { id, text, amount, type, year, month };
+export function saveNewOperation(text, amount, type, category, year, month) {
+  const id = nanoid(15);
+  return { id, text, amount, type, category, year, month };
 }
 
 const operationsSlice = createSlice({
