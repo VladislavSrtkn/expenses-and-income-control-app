@@ -17,6 +17,13 @@ export function createNewCategory(name, color, type) {
   localStorage.setItem('categories', json);
 }
 
+export function deleteCategory(name) {
+  const categories = JSON.parse(localStorage.getItem('categories'));
+  delete categories[name];
+  const json = JSON.stringify(categories);
+  localStorage.setItem('categories', json);
+}
+
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState,

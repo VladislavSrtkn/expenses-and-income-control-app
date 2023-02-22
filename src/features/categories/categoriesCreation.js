@@ -23,6 +23,7 @@ export default function CategoriesCreation() {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
+    setIsCreated(false);
     const trimmedName = name.trim();
     if (!validateName(trimmedName)) {
       setNameError(true);
@@ -87,9 +88,15 @@ export default function CategoriesCreation() {
       </Grid2>
 
       {isCreated && (
-        <p>
-          Congratulation! You have successfully added a new category: type : {type}, name: {name},
-          color: {color}
+        <p
+          style={{
+            borderRadius: '0.3rem',
+            padding: '0.5rem',
+            backgroundColor: '#4eaf3d',
+            color: '#fff',
+          }}
+        >
+          You have successfully added a new category!
         </p>
       )}
     </Grid2>
