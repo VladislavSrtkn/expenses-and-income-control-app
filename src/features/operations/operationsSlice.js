@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid';
 const operationsAdapter = createEntityAdapter();
 const initialState = operationsAdapter.getInitialState();
 
-export function saveNewOperation(text, amount, type, category, year, month) {
+export function saveNewOperation(text, amount, type, category, year, month, date) {
   const id = nanoid(15);
-  return { id, text, amount, type, category, year, month };
+  return { id, text, amount, type, category, year, month, date };
 }
 
 const operationsSlice = createSlice({

@@ -1,27 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { categories } from './categories';
 
-if (!localStorage.getItem('categories')) {
-  const json = JSON.stringify(categories);
+function getCategoriesFromStorage() {
+  return JSON.parse(localStorage.getItem('categories'));
+}
+
+function setCategoriesToStorage(categoriesObj) {
+  const json = JSON.stringify(categoriesObj);
   localStorage.setItem('categories', json);
+}
+
+if (!localStorage.getItem('categories')) {
+  setCategoriesToStorage(categories);
 }
 
 const initialState = {
-  categories: JSON.parse(localStorage.getItem('categories')),
+  categories: getCategoriesFromStorage(),
 };
 
 export function createNewCategory(name, color, type) {
-  const categories = JSON.parse(localStorage.getItem('categories'));
-  categories[name] = { name, color, type };
-  const json = JSON.stringify(categories);
-  localStorage.setItem('categories', json);
+  const categories = getCategoriesFromStorage();
+  categories[name] = { name, color, type, visibility: true, limit: 0 };
+  setCategoriesToStorage(categories);
 }
 
-export function deleteCategory(name) {
-  const categories = JSON.parse(localStorage.getItem('categories'));
-  delete categories[name];
-  const json = JSON.stringify(categories);
-  localStorage.setItem('categories', json);
+export function changeCategoryVisibility(name) {
+  const categories = getCategoriesFromStorage();
+  categories[name].visibility = !categories[name].visibility;
+  setCategoriesToStorage(categories);
+}
+
+export function changeCategoryLimit(name, limit) {
+  const categories = getCategoriesFromStorage();
+  categories[name].limit = limit;
+  setCategoriesToStorage(categories);
 }
 
 const categoriesSlice = createSlice({
@@ -29,7 +41,7 @@ const categoriesSlice = createSlice({
   initialState,
   reducers: {
     categoriesChanged(state, action) {
-      state.categories = JSON.parse(localStorage.getItem('categories'));
+      state.categories = getCategoriesFromStorage();
     },
   },
 });

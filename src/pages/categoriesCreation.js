@@ -1,9 +1,9 @@
-import { Button, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Button, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { HexColorPicker } from 'react-colorful';
 import { useState } from 'react';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import { useDispatch } from 'react-redux';
-import { createNewCategory, categoriesChanged } from './categoriesSlice';
+import { createNewCategory, categoriesChanged } from '../features/categories/categoriesSlice';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function validateName(name) {
@@ -54,7 +54,7 @@ export default function CategoriesCreation() {
     >
       <h4>Create your own categories!</h4>
       <Grid2 item>
-        <p>Choose a type:</p>
+        <Typography py={3}>Choose a type:</Typography>
         <ToggleButtonGroup color='primary' value={type} onChange={(e) => setType(e.target.value)}>
           <ToggleButton value='expense'>expense</ToggleButton>
           <ToggleButton value='income'>income</ToggleButton>
@@ -62,7 +62,7 @@ export default function CategoriesCreation() {
       </Grid2>
 
       <Grid2 item xs={12} sx={{ minHeight: '10rem' }}>
-        <p>Choose a name :</p>
+        <Typography py={3}>Choose a name :</Typography>
         <TextField
           variant='standard'
           value={name}
@@ -75,11 +75,11 @@ export default function CategoriesCreation() {
       </Grid2>
 
       <Grid2 item display='flex' flexDirection='column' alignItems='center'>
-        <p>Pick a color:</p>
+        <Typography py={3}>Pick a color:</Typography>
         <HexColorPicker color={color} onChange={setColor} />
         <Button
           variant='outlined'
-          sx={{ marginY: '1rem' }}
+          sx={{ marginY: '2rem' }}
           endIcon={<PlaylistAddCheckIcon />}
           onClick={handleSubmit}
         >
@@ -88,16 +88,9 @@ export default function CategoriesCreation() {
       </Grid2>
 
       {isCreated && (
-        <p
-          style={{
-            borderRadius: '0.3rem',
-            padding: '0.5rem',
-            backgroundColor: '#4eaf3d',
-            color: '#fff',
-          }}
-        >
+        <Typography sx={{ borderRadius: '0.3rem', p: 1, mb: 3, bgcolor: '#4eaf3d', color: '#fff' }}>
           You have successfully added a new category!
-        </p>
+        </Typography>
       )}
     </Grid2>
   );

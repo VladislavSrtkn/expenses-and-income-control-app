@@ -5,10 +5,12 @@ import CreateIcon from '@mui/icons-material/Create';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { operationAdded, saveNewOperation } from '../operations/operationsSlice';
-import CategoriesButtons from './CategoriesButtons';
+import CategoriesButtons from '../categories/CategoriesButtons';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers-pro';
 
 function validateAmount(amount) {
   if (isNaN(amount) || amount <= 0) {
@@ -27,9 +29,9 @@ function validateCategory(category) {
 export default function InputForNewOperations() {
   const dispatch = useDispatch();
 
+  const [operationDate, setOperationDate] = useState(new Date());
+
   const type = useSelector((state) => state.filters.type);
-  const filterDate = useSelector((state) => state.filters.date);
-  const { year, month } = filterDate;
 
   const [text, setText] = useState('');
   const [category, setCategory] = useState('');
@@ -62,7 +64,11 @@ export default function InputForNewOperations() {
       return;
     }
     const fixedAmount = Number(amount).toFixed(2);
-    const operationObj = saveNewOperation(text, fixedAmount, type, category, year, month);
+    const year = operationDate.getFullYear();
+    const month = operationDate.getMonth();
+    const date = operationDate.getDate();
+
+    const operationObj = saveNewOperation(text, fixedAmount, type, category, year, month, date);
     dispatch(operationAdded(operationObj));
     setText('');
     setAmount('');
@@ -70,65 +76,84 @@ export default function InputForNewOperations() {
   };
 
   return (
-    type !== 'all' && (
-      <Grid2
-        container
-        direction='column'
-        alignItems='center'
-        justifyContent='center'
-        columnSpacing={0}
-      >
-        <CategoriesButtons clickHandler={handlePick} pickedCat={category} />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      {type !== 'all' && (
+        <Grid2
+          container
+          direction='column'
+          alignItems='center'
+          justifyContent='center'
+          columnSpacing={0}
+        >
+          <CategoriesButtons clickHandler={handlePick} pickedCat={category} />
 
-        <Grid2 item display='flex'>
-          <Grid2 item xs={5}>
-            <TextField
-              variant='standard'
-              label='Amount'
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              error={amountError}
-              helperText={amountError ? 'Invalid amount' : ''}
-              sx={{ paddingRight: '1rem' }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <PaymentsIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid2>
-          <Grid2 item xs={6}>
-            <TextField
-              variant='standard'
-              label='Comment'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <CreateIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
+          <Grid2 item display='flex' flexWrap='wrap'>
+            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+              <TextField
+                variant='standard'
+                label='Amount'
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                error={amountError}
+                helperText={amountError ? 'Invalid amount' : ''}
+                sx={{ paddingRight: '1rem' }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <PaymentsIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid2>
+
+            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+              <TextField
+                variant='standard'
+                label='Comment'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <CreateIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid2>
+
+            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+              <MobileDatePicker
+                label='Date'
+                value={operationDate}
+                onChange={(newDate) => {
+                  setOperationDate(newDate);
+                }}
+                renderInput={(params) => <TextField size='small' variant='standard' {...params} />}
+              />
+            </Grid2>
+
+            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+              <IconButton
+                color='success'
+                onClick={addNewOpeartion}
+                sx={{ paddingX: 0, paddingTop: '1rem' }}
+              >
+                <AddCircleIcon />
+              </IconButton>
+            </Grid2>
           </Grid2>
 
-          <Grid2 item xs={1}>
-            <IconButton
-              color='success'
-              onClick={addNewOpeartion}
-              sx={{ paddingX: 0, paddingTop: '1rem' }}
-            >
-              <AddCircleIcon />
-            </IconButton>
+          <Grid2 item xs={12} sx={{ minHeight: '2.5rem' }}>
+            {categoryError && (
+              <Typography component='span' sx={{ color: 'red' }}>
+                Please choose category
+              </Typography>
+            )}
           </Grid2>
         </Grid2>
-        <Grid2 item xs={12} sx={{ minHeight: '2.2rem' }}>
-          {categoryError && <span style={{ color: 'red' }}>Please choose category</span>}
-        </Grid2>
-      </Grid2>
-    )
+      )}
+    </LocalizationProvider>
   );
 }

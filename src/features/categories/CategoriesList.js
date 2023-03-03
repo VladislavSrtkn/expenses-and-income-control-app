@@ -1,4 +1,4 @@
-import { List } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import CategoriesListItem from './CategoriesListItem';
 
 export default function CategoriesList({ title, categories }) {
@@ -8,7 +8,9 @@ export default function CategoriesList({ title, categories }) {
 
   return (
     <>
-      <h4>{title}</h4>
+      <Typography component={'h3'} sx={{ fontWeight: 'bold' }}>
+        {title}
+      </Typography>
       <List>{input}</List>
     </>
   );

@@ -21,3 +21,12 @@ code {
 .selectedCategory {
   font-weight: bold;
 }
+
+.show-percent-box {
+  transition-property: width;
+  transition-duration: 1.3s;
+}
+
+.recharts-layer :focus {
+  outline: none;
+}

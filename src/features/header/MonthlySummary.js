@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 export default function MonthlySummary() {
@@ -32,8 +33,8 @@ export default function MonthlySummary() {
   });
 
   return (
-    <div>
+    <Typography>
       {header} {monthlyTotal} {currencyLabel}
-    </div>
+    </Typography>
   );
 }

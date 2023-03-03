@@ -20,6 +20,7 @@ import ViewStreamIcon from '@mui/icons-material/ViewStream';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -141,6 +142,15 @@ export default function PageHeader() {
                 <CalendarMonthIcon />
               </ListItemIcon>
               <ListItemText primary='Monthly statistics' />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding onClick={() => handleChangePage('limits')}>
+            <ListItemButton>
+              <ListItemIcon>
+                <SavingsIcon />
+              </ListItemIcon>
+              <ListItemText primary='Limits' />
             </ListItemButton>
           </ListItem>
           <Divider />

@@ -1,27 +1,30 @@
-import { Divider, IconButton, ListItem, ListItemText } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { categoriesChanged, deleteCategory } from './categoriesSlice';
+import { Divider, ListItem, ListItemText } from '@mui/material';
+import { categoriesChanged, changeCategoryVisibility } from './categoriesSlice';
 import { useDispatch } from 'react-redux';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function CategoriesListItem({ category }) {
-  const { name, color } = category;
+  const { name, color, visibility } = category;
   const dispatch = useDispatch();
 
-  const handleDelete = (name) => {
-    deleteCategory(name);
+  const handleChangeVisibility = (name) => {
+    changeCategoryVisibility(name);
     dispatch(categoriesChanged());
   };
 
   return (
     <>
       <ListItem>
+        <Checkbox
+          color='success'
+          checked={visibility}
+          onChange={() => handleChangeVisibility(name)}
+        />
+
         <ListItemText primary={name} />
         <span
           style={{ backgroundColor: color, width: '15%', height: '1rem', borderRadius: '0.2rem' }}
         ></span>
-        <IconButton color='default' onClick={() => handleDelete(name)}>
-          <DeleteIcon />
-        </IconButton>
       </ListItem>
       <Divider />
     </>

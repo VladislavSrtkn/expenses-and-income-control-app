@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 export default function CategoriesButtons({ clickHandler, pickedCat }) {
   const type = useSelector((state) => state.filters.type);
   const categories = useSelector((state) => state.categories.categories);
-
-  const categoriesButtons = Object.values(categories).map((cat, i) => {
+  const visibleCategories = Object.values(categories).filter((cat) => cat.visibility);
+  const categoriesButtons = visibleCategories.map((cat, i) => {
     const selected = pickedCat === cat.name ? 'selectedCategory' : null;
     if (cat.type === type) {
       return (

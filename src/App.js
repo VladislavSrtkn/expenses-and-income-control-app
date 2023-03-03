@@ -1,12 +1,15 @@
 import PageHeader from './features/pageHeader/PageHeader';
 import { Outlet } from 'react-router-dom';
+import { Box } from '@mui/material';
+
+localStorage.clear();
 
 function App() {
   return (
-    <div style={{ margin: 'auto' }}>
+    <Box sx={{ m: 'auto' }}>
       <PageHeader />
       <Outlet />
-    </div>
+    </Box>
   );
 }
 

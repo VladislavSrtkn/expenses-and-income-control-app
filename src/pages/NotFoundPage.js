@@ -1,7 +1,9 @@
+import { Typography } from '@mui/material';
+
 export default function NotFoundPage() {
   return (
-    <p style={{ padding: '1rem', textAlign: 'center' }}>
+    <Typography sx={{ p: 2, textAlign: 'center' }}>
       Whoops! Looks like this page doesn't exist.
-    </p>
+    </Typography>
   );
 }

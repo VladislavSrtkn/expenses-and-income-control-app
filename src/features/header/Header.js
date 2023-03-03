@@ -13,7 +13,8 @@ export default function Header() {
       direction='column'
       rowSpacing={2}
       md={3}
-      xs={10}
+      px={2}
+      xs={12}
       margin='auto'
     >
       <Grid2 item>
