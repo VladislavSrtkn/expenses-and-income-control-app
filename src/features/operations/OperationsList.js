@@ -10,13 +10,15 @@ export default function OperationsList() {
 
   const operations = useSelector((state) => Object.values(state.operations.entities));
 
-  const filteredOperations = operations.filter((operation) => {
-    const matchedYear = operation.year === year;
-    const matchedMonth = operation.month === month;
-    const matchedType = operation.type === filterType || filterType === 'all';
+  const filteredOperations = operations
+    .filter((operation) => {
+      const matchedYear = operation.year === year;
+      const matchedMonth = operation.month === month;
+      const matchedType = operation.type === filterType || filterType === 'all';
 
-    return matchedYear && matchedMonth && matchedType;
-  });
+      return matchedYear && matchedMonth && matchedType;
+    })
+    .sort((a, b) => a.date - b.date);
 
   const input = filteredOperations.map((item) => (
     <OperationsListItem key={item.id} itemObj={item} />

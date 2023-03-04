@@ -3,8 +3,8 @@ import { PieChart, Pie, Cell } from 'recharts';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import CategoryLegendButton from './CategoryLegendButton';
 import { useState } from 'react';
-import OperationsList from '../operations/OperationsList';
-import { Box } from '@mui/system';
+import OperationShortItem from '../operations/OperationShortItem';
+import { List } from '@mui/material';
 
 function addSumForCategories(year, month, type, operations, categories) {
   const categoriesCopy = { ...categories };
@@ -26,6 +26,15 @@ function addSumForCategories(year, month, type, operations, categories) {
 
 export default function CategoriesPie({ operationsType }) {
   const [pickedCat, setPickedCat] = useState(null);
+
+  const handleSwitchPickedCat = (cat) => {
+    if (cat === pickedCat) {
+      setPickedCat(null);
+      return;
+    }
+
+    setPickedCat(cat);
+  };
 
   const filterDate = useSelector((state) => state.filters.date);
   const { year, month } = filterDate;
@@ -51,7 +60,7 @@ export default function CategoriesPie({ operationsType }) {
     .sort((a, b) => b.value - a.value);
 
   const cells = data.map((cat, index) => (
-    <Cell onClick={() => setPickedCat(cat.name)} key={index} fill={cat.color} />
+    <Cell onClick={() => handleSwitchPickedCat(cat.name)} key={index} fill={cat.color} />
   ));
 
   const legend = data.map((cat, index) => (
@@ -59,12 +68,34 @@ export default function CategoriesPie({ operationsType }) {
       key={index}
       category={cat}
       currencyLabel={currencyLabel}
-      clickHandler={setPickedCat}
+      clickHandler={handleSwitchPickedCat}
+    />
+  ));
+
+  const operationsWithSelectedCat = operations
+    .filter((operation) => {
+      const matchedCat = pickedCat === operation.category;
+      const matchedYear = year === operation.year;
+      const matchedMonth = month === operation.month;
+
+      return matchedCat && matchedYear && matchedMonth;
+    })
+    .sort((a, b) => a.date - b.date);
+
+  const listInput = operationsWithSelectedCat.map((operation) => (
+    <OperationShortItem
+      key={operation.id}
+      year={operation.year}
+      month={operation.month}
+      date={operation.date}
+      amount={operation.amount}
+      currency={currencyLabel}
+      comment={operation.text}
     />
   ));
 
   return (
-    <Grid2 item display='flex' flexDirection='column' alignItems='center'>
+    <Grid2 xs={12} item display='flex' flexDirection='column' alignItems='center'>
       {Boolean(data.length) && (
         <>
           <PieChart width={280} height={200}>
@@ -85,7 +116,9 @@ export default function CategoriesPie({ operationsType }) {
           <Grid2 item display='flex' gap={1} flexWrap='wrap' sx={{ marginY: '1.5rem' }}>
             {legend}
           </Grid2>
-          <OperationsList />
+          <Grid2 item xs={12}>
+            <List>{listInput}</List>
+          </Grid2>
         </>
       )}
       {!data.length && <p>{noOperationsText}</p>}

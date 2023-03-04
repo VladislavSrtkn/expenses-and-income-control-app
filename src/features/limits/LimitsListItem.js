@@ -33,8 +33,7 @@ export default function LimitsListItem({ item, isOpen }) {
   const limitPercent = calculateLimitPercentage(limit, expenses);
   const percent = `${limitPercent < 100 ? limitPercent : 100}%`;
 
-  const balance = limit - expenses;
-
+  const balance = (limit - expenses).toFixed(2);
   const displayedBalance =
     balance > 0
       ? `Left: ${balance}${currencyLabel}`

@@ -14,7 +14,7 @@ export default function CategoriesListItem({ category }) {
 
   return (
     <>
-      <ListItem>
+      <ListItem sx={{ alignItems: 'center' }}>
         <Checkbox
           color='success'
           checked={visibility}

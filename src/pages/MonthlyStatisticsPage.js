@@ -7,7 +7,16 @@ export default function MonthlyStatisticsPage() {
   const style = { py: 3, fontWeight: 'bold' };
 
   return (
-    <Grid2 container direction='column' xs={12} px={2} md={3} textAlign='center' margin='auto'>
+    <Grid2
+      container
+      direction='column'
+      xs={12}
+      px={2}
+      md={3}
+      textAlign='center'
+      margin='auto'
+      alignContent='center'
+    >
       <Grid2 item>
         <DateFilter />
       </Grid2>

@@ -60,7 +60,7 @@ export default function LimitsManagement() {
       return;
     }
 
-    changeCategoryLimit(category, Number(limit));
+    changeCategoryLimit(category, Number(limit).toFixed(2));
     dispatch(categoriesChanged());
     setCategory('');
     setLimit('');
