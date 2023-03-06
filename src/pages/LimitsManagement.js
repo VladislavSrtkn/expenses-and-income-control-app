@@ -39,11 +39,11 @@ export default function LimitsManagement() {
 
   const currencyLabel = useSelector((state) => state.filters.currency.label);
 
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.entities);
   const filteredCategories = Object.values(categories).filter((cat) => cat.type === 'expense');
 
   const categoryOptions = filteredCategories.map((cat) => (
-    <MenuItem key={cat.name} value={cat.name}>
+    <MenuItem key={cat.id} value={cat.id}>
       {cat.name}
     </MenuItem>
   ));

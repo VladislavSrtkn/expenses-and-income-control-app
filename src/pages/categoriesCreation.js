@@ -2,31 +2,37 @@ import { Button, TextField, ToggleButton, ToggleButtonGroup, Typography } from '
 import { HexColorPicker } from 'react-colorful';
 import { useState } from 'react';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createNewCategory, categoriesChanged } from '../features/categories/categoriesSlice';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-function validateName(name) {
-  if (name === '' || name.length > 20) {
-    return false;
+function checkIsNameInvalid(input, names) {
+  if (input === '' || input.length > 20) {
+    return 'Please enter a name (max 20 characters)';
   }
-  return true;
+  if (names.includes(input)) {
+    return 'A category with this name already exists';
+  }
+  return false;
 }
 
 export default function CategoriesCreation() {
   const [type, setType] = useState('expense');
-  const [color, setColor] = useState('#aabbcc');
+  const [color, setColor] = useState('#6032c1');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
+
+  const categories = useSelector((state) => Object.values(state.categories.entities));
+  const categoriesNames = categories.map((cat) => cat.name);
 
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
     setIsCreated(false);
     const trimmedName = name.trim();
-    if (!validateName(trimmedName)) {
-      setNameError(true);
+    if (checkIsNameInvalid(trimmedName, categoriesNames)) {
+      setNameError(checkIsNameInvalid(trimmedName, categoriesNames));
       return;
     }
 
@@ -39,6 +45,7 @@ export default function CategoriesCreation() {
   const handleNameChange = (e) => {
     setName(e.target.value);
     setNameError(false);
+    setIsCreated(false);
   };
 
   return (
@@ -69,7 +76,7 @@ export default function CategoriesCreation() {
           label='Name'
           fullWidth
           error={nameError}
-          helperText={nameError ? 'Please enter a name (max 20 characters)' : ''}
+          helperText={nameError ? nameError : null}
           onChange={(e) => handleNameChange(e)}
         />
       </Grid2>

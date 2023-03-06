@@ -28,15 +28,13 @@ function validateCategory(category) {
 
 export default function InputForNewOperations() {
   const dispatch = useDispatch();
-
-  const [operationDate, setOperationDate] = useState(new Date());
-
   const type = useSelector((state) => state.filters.type);
 
+  const [operationDate, setOperationDate] = useState(new Date());
   const [text, setText] = useState('');
   const [category, setCategory] = useState('');
-  const [amount, setAmount] = useState('');
 
+  const [amount, setAmount] = useState('');
   const [amountError, setAmountError] = useState(false);
   useEffect(() => {
     const timerId = setTimeout(() => setAmountError(false), 2000);
@@ -49,8 +47,8 @@ export default function InputForNewOperations() {
     return () => clearTimeout(timerId);
   }, [categoryError]);
 
-  const handlePick = (category) => {
-    setCategory(category);
+  const handlePick = (categoryId) => {
+    setCategory(categoryId);
   };
   useEffect(() => setCategory(''), [type]);
 

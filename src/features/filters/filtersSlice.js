@@ -36,9 +36,14 @@ const filtersSlice = createSlice({
       state.date.year = newDate.getFullYear();
       state.date.month = newDate.getMonth();
     },
+    dateFilterReseted(state) {
+      state.date.year = today.getFullYear();
+      state.date.month = today.getMonth();
+    },
   },
 });
 
-export const { typeFilterChanged, dateFilterChanged, currencyChanged } = filtersSlice.actions;
+export const { typeFilterChanged, dateFilterChanged, dateFilterReseted, currencyChanged } =
+  filtersSlice.actions;
 
 export default filtersSlice.reducer;

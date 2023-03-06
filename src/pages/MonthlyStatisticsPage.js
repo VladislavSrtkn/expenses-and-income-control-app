@@ -11,8 +11,8 @@ export default function MonthlyStatisticsPage() {
       container
       direction='column'
       xs={12}
-      px={2}
       md={3}
+      px={2}
       textAlign='center'
       margin='auto'
       alignContent='center'

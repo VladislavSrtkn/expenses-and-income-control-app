@@ -6,13 +6,18 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import format from 'date-fns/format';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { dateFilterChanged } from '../filters/filtersSlice';
+import { dateFilterChanged, dateFilterReseted } from '../filters/filtersSlice';
+import { useEffect } from 'react';
 
 export default function DateFilter() {
   const dispatch = useDispatch();
 
   const filterDate = useSelector((state) => state.filters.date);
   const { year, month } = filterDate;
+
+  useEffect(() => {
+    dispatch(dateFilterReseted());
+  }, [dispatch]);
 
   const setPreviousMonth = () => dispatch(dateFilterChanged(month - 1));
   const setNextMonth = () => dispatch(dateFilterChanged(month + 1));

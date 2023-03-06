@@ -1,14 +1,14 @@
-import { Divider, ListItem, ListItemText } from '@mui/material';
+import { Box, Divider, ListItem, ListItemText } from '@mui/material';
 import { categoriesChanged, changeCategoryVisibility } from './categoriesSlice';
 import { useDispatch } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function CategoriesListItem({ category }) {
-  const { name, color, visibility } = category;
+  const { id, name, color, visibility } = category;
   const dispatch = useDispatch();
 
-  const handleChangeVisibility = (name) => {
-    changeCategoryVisibility(name);
+  const handleChangeVisibility = (id) => {
+    changeCategoryVisibility(id);
     dispatch(categoriesChanged());
   };
 
@@ -18,13 +18,14 @@ export default function CategoriesListItem({ category }) {
         <Checkbox
           color='success'
           checked={visibility}
-          onChange={() => handleChangeVisibility(name)}
+          onChange={() => handleChangeVisibility(id)}
         />
 
         <ListItemText primary={name} />
-        <span
-          style={{ backgroundColor: color, width: '15%', height: '1rem', borderRadius: '0.2rem' }}
-        ></span>
+        <Box
+          component='span'
+          sx={{ bgcolor: color, width: '15%', height: '1rem', borderRadius: '0.2rem' }}
+        ></Box>
       </ListItem>
       <Divider />
     </>

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { categories } from './categories';
+import { nanoid } from 'nanoid';
 
 function getCategoriesFromStorage() {
   return JSON.parse(localStorage.getItem('categories'));
@@ -15,24 +16,25 @@ if (!localStorage.getItem('categories')) {
 }
 
 const initialState = {
-  categories: getCategoriesFromStorage(),
+  entities: getCategoriesFromStorage(),
 };
 
 export function createNewCategory(name, color, type) {
   const categories = getCategoriesFromStorage();
-  categories[name] = { name, color, type, visibility: true, limit: 0 };
+  const id = nanoid(15);
+  categories[id] = { id, name, color, type, visibility: true, limit: 0 };
   setCategoriesToStorage(categories);
 }
 
-export function changeCategoryVisibility(name) {
+export function changeCategoryVisibility(id) {
   const categories = getCategoriesFromStorage();
-  categories[name].visibility = !categories[name].visibility;
+  categories[id].visibility = !categories[id].visibility;
   setCategoriesToStorage(categories);
 }
 
-export function changeCategoryLimit(name, limit) {
+export function changeCategoryLimit(id, limit) {
   const categories = getCategoriesFromStorage();
-  categories[name].limit = limit;
+  categories[id].limit = limit;
   setCategoriesToStorage(categories);
 }
 
@@ -40,8 +42,8 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    categoriesChanged(state, action) {
-      state.categories = getCategoriesFromStorage();
+    categoriesChanged(state) {
+      state.entities = getCategoriesFromStorage();
     },
   },
 });

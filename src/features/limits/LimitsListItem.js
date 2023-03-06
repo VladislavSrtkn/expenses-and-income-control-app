@@ -10,7 +10,7 @@ import { calculateLimitPercentage } from './calclulateLimitPercentage';
 export default function LimitsListItem({ item, isOpen }) {
   const [open, setOpen] = useState(isOpen);
 
-  const { name, color, limit } = item;
+  const { id, name, color, limit } = item;
 
   const filterDate = useSelector((state) => state.filters.date);
   const { year, month } = filterDate;
@@ -22,10 +22,9 @@ export default function LimitsListItem({ item, isOpen }) {
   const filteredOperations = operations.filter((operation) => {
     const matchedYear = operation.year === year;
     const matchedMonth = operation.month === month;
-    const matchedCategory = operation.category === name;
-    const matchedType = operation.type === 'expense';
+    const matchedCategory = operation.category === id;
 
-    return matchedYear && matchedMonth && matchedCategory && matchedType;
+    return matchedYear && matchedMonth && matchedCategory;
   });
 
   const expenses = calculateExpenses(filteredOperations);

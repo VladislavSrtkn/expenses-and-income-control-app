@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 
 export default function CategoriesButtons({ clickHandler, pickedCat }) {
   const type = useSelector((state) => state.filters.type);
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.entities);
   const visibleCategories = Object.values(categories).filter((cat) => cat.visibility);
+
   const categoriesButtons = visibleCategories.map((cat, i) => {
-    const selected = pickedCat === cat.name ? 'selectedCategory' : null;
+    const selected = pickedCat === cat.id ? 'selectedCategory' : null;
     if (cat.type === type) {
       return (
         <Box
@@ -23,7 +24,7 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
             bgcolor: cat.color,
             ':hover': { cursor: 'pointer' },
           }}
-          onClick={() => clickHandler(cat.name)}
+          onClick={() => clickHandler(cat.id)}
         >
           {cat.name}
         </Box>

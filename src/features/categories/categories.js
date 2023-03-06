@@ -1,43 +1,55 @@
-export const categories = {
-  'Other income': {
+import { nanoid } from 'nanoid';
+
+const categoriesData = [
+  {
     name: 'Other income',
     color: '#88888b',
     type: 'income',
     visibility: true,
     limit: 0,
   },
-  Salary: { name: 'Salary', color: '#4daf3c', type: 'income', visibility: true, limit: 0 },
-  Cashback: { name: 'Cashback', color: '#aa25e7', type: 'income', visibility: true, limit: 0 },
-  'Interest on deposits': {
+  { name: 'Salary', color: '#4daf3c', type: 'income', visibility: true, limit: 0 },
+  { name: 'Cashback', color: '#aa25e7', type: 'income', visibility: true, limit: 0 },
+  {
     name: 'Interest on deposits',
     color: '#6966ca',
     type: 'income',
     visibility: true,
     limit: 0,
   },
-  'Other expenses': {
+  {
     name: 'Other expenses',
     color: '#88888b',
     type: 'expense',
     visibility: true,
     limit: 0,
   },
-  Supermarkets: {
+  {
     name: 'Supermarkets',
     color: '#f3b619',
     type: 'expense',
     visibility: true,
     limit: 0,
   },
-  Utilities: { name: 'Utilities', color: '#dd446c', type: 'expense', visibility: true, limit: 0 },
-  Clothes: { name: 'Clothes', color: '#058795', type: 'expense', visibility: true, limit: 0 },
-  'Cafe and restaurants': {
+  { name: 'Utilities', color: '#dd446c', type: 'expense', visibility: true, limit: 0 },
+  { name: 'Clothes', color: '#058795', type: 'expense', visibility: true, limit: 0 },
+  {
     name: 'Cafe and restaurants',
     color: '#22a9e7',
     type: 'expense',
     visibility: true,
     limit: 0,
   },
-  Travel: { name: 'Travel', color: '#e7228c', type: 'expense', visibility: true, limit: 0 },
-  Rent: { name: 'Rent', color: '#4e17e3a1', type: 'expense', visibility: true, limit: 0 },
-};
+  { name: 'Travel', color: '#e7228c', type: 'expense', visibility: true, limit: 0 },
+  { name: 'Rent', color: '#4e17e3a1', type: 'expense', visibility: true, limit: 0 },
+];
+
+const categories = {};
+
+categoriesData.map((cat) => {
+  const id = nanoid(15);
+  categories[id] = { ...cat, id };
+  return undefined;
+});
+
+export { categories };

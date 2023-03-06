@@ -27,19 +27,19 @@ function addSumForCategories(year, month, type, operations, categories) {
 export default function CategoriesPie({ operationsType }) {
   const [pickedCat, setPickedCat] = useState(null);
 
-  const handleSwitchPickedCat = (cat) => {
-    if (cat === pickedCat) {
+  const handleSwitchPickedCat = (catId) => {
+    if (catId === pickedCat) {
       setPickedCat(null);
       return;
     }
 
-    setPickedCat(cat);
+    setPickedCat(catId);
   };
 
   const filterDate = useSelector((state) => state.filters.date);
   const { year, month } = filterDate;
   const operations = useSelector((state) => Object.values(state.operations.entities));
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.entities);
   const currencyLabel = useSelector((state) => state.filters.currency.label);
 
   const noOperationsText =
@@ -59,13 +59,13 @@ export default function CategoriesPie({ operationsType }) {
     .filter((cat) => cat.value)
     .sort((a, b) => b.value - a.value);
 
-  const cells = data.map((cat, index) => (
-    <Cell onClick={() => handleSwitchPickedCat(cat.name)} key={index} fill={cat.color} />
+  const cells = data.map((cat) => (
+    <Cell onClick={() => handleSwitchPickedCat(cat.id)} key={cat.id} fill={cat.color} />
   ));
 
-  const legend = data.map((cat, index) => (
+  const legend = data.map((cat) => (
     <CategoryLegendButton
-      key={index}
+      key={cat.id}
       category={cat}
       currencyLabel={currencyLabel}
       clickHandler={handleSwitchPickedCat}
@@ -80,18 +80,10 @@ export default function CategoriesPie({ operationsType }) {
 
       return matchedCat && matchedYear && matchedMonth;
     })
-    .sort((a, b) => a.date - b.date);
+    .sort((a, b) => b.date - a.date);
 
   const listInput = operationsWithSelectedCat.map((operation) => (
-    <OperationShortItem
-      key={operation.id}
-      year={operation.year}
-      month={operation.month}
-      date={operation.date}
-      amount={operation.amount}
-      currency={currencyLabel}
-      comment={operation.text}
-    />
+    <OperationShortItem key={operation.id} operation={operation} currency={currencyLabel} />
   ));
 
   return (

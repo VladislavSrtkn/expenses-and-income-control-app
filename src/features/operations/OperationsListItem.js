@@ -9,7 +9,10 @@ export default function OperationsListItem({ itemObj }) {
   const { id, text, amount, type, category, year, month, date } = itemObj;
   const dispatch = useDispatch();
   const currencyLabel = useSelector((state) => state.filters.currency.label);
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.entities);
+
+  const catName = categories[category].name;
+  const color = categories[category].color;
 
   const handleDelete = () => dispatch(operationDeleted(id));
 
@@ -39,7 +42,7 @@ export default function OperationsListItem({ itemObj }) {
           <Grid2 item xs={6}>
             <ListItemText
               primary={text}
-              secondary={category}
+              secondary={catName}
               sx={{ overflow: 'overlay', fontSize: '0.7rem' }}
             />
           </Grid2>
@@ -50,7 +53,7 @@ export default function OperationsListItem({ itemObj }) {
                 width: '1rem',
                 height: '1rem',
                 borderRadius: '0.3rem',
-                bgcolor: categories[category].color,
+                bgcolor: color,
               }}
             ></Box>
           </Grid2>

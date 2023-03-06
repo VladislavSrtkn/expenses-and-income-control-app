@@ -3,7 +3,7 @@ import CategoriesListItem from './CategoriesListItem';
 
 export default function CategoriesList({ title, categories }) {
   const input = categories.map((category) => (
-    <CategoriesListItem key={category.name} category={category} />
+    <CategoriesListItem key={category.id} category={category} />
   ));
 
   return (

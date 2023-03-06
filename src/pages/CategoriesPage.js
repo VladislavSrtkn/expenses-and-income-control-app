@@ -4,7 +4,7 @@ import CategoriesList from '../features/categories/CategoriesList';
 import { Typography } from '@mui/material';
 
 export default function CategoriesPage() {
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.entities);
   const income = Object.values(categories).filter((cat) => cat.type === 'income');
   const expense = Object.values(categories).filter((cat) => cat.type === 'expense');
 

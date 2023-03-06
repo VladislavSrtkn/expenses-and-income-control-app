@@ -2,7 +2,8 @@ import { Divider, ListItem, ListItemText } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { format } from 'date-fns';
 
-export default function OperationShortItem({ year, month, date, amount, currency, comment = '' }) {
+export default function OperationShortItem({ operation, currency }) {
+  const { year, month, date, amount, comment } = operation;
   const formattedDate = format(new Date(year, month, date), 'do MMM');
 
   return (
