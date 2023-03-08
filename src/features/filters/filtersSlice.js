@@ -1,6 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { currencies } from './currencies';
 
+function getCurrencyFromStorage() {
+  return JSON.parse(localStorage.getItem('currency'));
+}
+
+function setCurrencyToStorage(currencyObj) {
+  const json = JSON.stringify(currencyObj);
+  localStorage.setItem('currency', json);
+}
+
+if (!localStorage.getItem('currency')) {
+  setCurrencyToStorage(currencies.eur);
+}
+
 export const typeFilters = {
   All: 'all',
   Income: 'income',
@@ -11,7 +24,7 @@ const today = new Date();
 
 const initialState = {
   type: typeFilters.Expenses,
-  currency: currencies.eur,
+  currency: getCurrencyFromStorage(),
   date: {
     year: today.getFullYear(),
     month: today.getMonth(),
@@ -25,8 +38,8 @@ const filtersSlice = createSlice({
     typeFilterChanged(state, action) {
       state.type = action.payload;
     },
-    currencyChanged(state, action) {
-      state.currency = action.payload;
+    currencyChanged(state) {
+      state.currency = getCurrencyFromStorage();
     },
     dateFilterChanged(state, action) {
       const newDate = new Date(Date.parse(`${state.date.year}-${state.date.month + 1}`));
@@ -45,5 +58,7 @@ const filtersSlice = createSlice({
 
 export const { typeFilterChanged, dateFilterChanged, dateFilterReseted, currencyChanged } =
   filtersSlice.actions;
+
+export { setCurrencyToStorage };
 
 export default filtersSlice.reducer;

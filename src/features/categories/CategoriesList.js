@@ -2,9 +2,9 @@ import { List, Typography } from '@mui/material';
 import CategoriesListItem from './CategoriesListItem';
 
 export default function CategoriesList({ title, categories }) {
-  const input = categories.map((category) => (
-    <CategoriesListItem key={category.id} category={category} />
-  ));
+  const input = categories
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((category) => <CategoriesListItem key={category.id} category={category} />);
 
   return (
     <>

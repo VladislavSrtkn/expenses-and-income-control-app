@@ -4,13 +4,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import CreateIcon from '@mui/icons-material/Create';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { IconButton, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { operationAdded, saveNewOperation } from '../operations/operationsSlice';
+import { saveNewOperation, operationsChanged } from '../operations/operationsSlice';
 import CategoriesButtons from '../categories/CategoriesButtons';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers-pro';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function validateAmount(amount) {
   if (isNaN(amount) || amount <= 0) {
@@ -29,6 +29,8 @@ function validateCategory(category) {
 export default function InputForNewOperations() {
   const dispatch = useDispatch();
   const type = useSelector((state) => state.filters.type);
+
+  const [loading, setLoading] = useState(false);
 
   const [operationDate, setOperationDate] = useState(new Date());
   const [text, setText] = useState('');
@@ -61,16 +63,20 @@ export default function InputForNewOperations() {
       setCategoryError(true);
       return;
     }
-    const fixedAmount = Number(amount).toFixed(2);
-    const year = operationDate.getFullYear();
-    const month = operationDate.getMonth();
-    const date = operationDate.getDate();
+    setLoading(true);
+    setTimeout(() => {
+      const fixedAmount = Number(amount).toFixed(2);
+      const year = operationDate.getFullYear();
+      const month = operationDate.getMonth();
+      const date = operationDate.getDate();
 
-    const operationObj = saveNewOperation(text, fixedAmount, type, category, year, month, date);
-    dispatch(operationAdded(operationObj));
-    setText('');
-    setAmount('');
-    setCategory('');
+      saveNewOperation(text, fixedAmount, type, category, year, month, date);
+      dispatch(operationsChanged());
+      setText('');
+      setAmount('');
+      setCategory('');
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -89,11 +95,12 @@ export default function InputForNewOperations() {
             <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
               <TextField
                 variant='standard'
+                size='small'
                 label='Amount'
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 error={amountError}
-                helperText={amountError ? 'Invalid amount' : ''}
+                helperText={amountError ? 'Invalid amount' : ' '}
                 sx={{ paddingRight: '1rem' }}
                 InputProps={{
                   startAdornment: (
@@ -107,6 +114,7 @@ export default function InputForNewOperations() {
 
             <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
               <TextField
+                size='small'
                 variant='standard'
                 label='Comment'
                 value={text}
@@ -132,14 +140,15 @@ export default function InputForNewOperations() {
               />
             </Grid2>
 
-            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
-              <IconButton
-                color='success'
+            <Grid2 item xs={6}>
+              <Button
                 onClick={addNewOpeartion}
-                sx={{ paddingX: 0, paddingTop: '1rem' }}
+                variant='contained'
+                sx={{ textTransform: 'capitalize' }}
+                endIcon={loading ? <CircularProgress size={20} sx={{ color: 'white' }} /> : null}
               >
-                <AddCircleIcon />
-              </IconButton>
+                Add
+              </Button>
             </Grid2>
           </Grid2>
 

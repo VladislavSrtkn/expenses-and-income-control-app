@@ -19,7 +19,7 @@ const initialState = {
   entities: getCategoriesFromStorage(),
 };
 
-export function createNewCategory(name, color, type) {
+function createNewCategory(name, color, type) {
   const categories = getCategoriesFromStorage();
   const id = nanoid(15);
   categories[id] = { id, name, color, type, visibility: true, limit: 0 };
@@ -47,6 +47,8 @@ const categoriesSlice = createSlice({
     },
   },
 });
+
+export { createNewCategory };
 
 export const { categoriesChanged } = categoriesSlice.actions;
 

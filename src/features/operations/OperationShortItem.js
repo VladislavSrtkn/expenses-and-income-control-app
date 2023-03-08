@@ -3,8 +3,9 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { format } from 'date-fns';
 
 export default function OperationShortItem({ operation, currency }) {
-  const { year, month, date, amount, comment } = operation;
+  const { year, month, date, type, amount, text } = operation;
   const formattedDate = format(new Date(year, month, date), 'do MMM');
+  const displayedAmount = type === 'income' ? `+${amount}` : `-${amount}`;
 
   return (
     <>
@@ -20,11 +21,11 @@ export default function OperationShortItem({ operation, currency }) {
             <ListItemText
               sx={{ minWidth: 'fit-content' }}
               secondary={formattedDate}
-              primary={`${amount}${currency}`}
+              primary={`${displayedAmount}${currency}`}
             ></ListItemText>
           </Grid2>
           <Grid2 item xs={6}>
-            <ListItemText sx={{ overflow: 'overlay' }} primary={comment}></ListItemText>
+            <ListItemText sx={{ overflow: 'overlay' }} primary={text}></ListItemText>
           </Grid2>
         </Grid2>
       </ListItem>

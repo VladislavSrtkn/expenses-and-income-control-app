@@ -8,6 +8,8 @@ import {
   Button,
   FormHelperText,
   Typography,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useState } from 'react';
@@ -34,6 +36,8 @@ export default function LimitsManagement() {
   const [categoryError, setCategoryError] = useState(false);
   const [limit, setLimit] = useState('');
   const [limitError, setLimitError] = useState(false);
+  const [snackBarOpen, setsnackBarOpen] = useState(false);
+  const [message, setMessage] = useState('');
 
   const dispatch = useDispatch();
 
@@ -64,6 +68,8 @@ export default function LimitsManagement() {
     dispatch(categoriesChanged());
     setCategory('');
     setLimit('');
+    setMessage('The limit has been successfully set!');
+    setsnackBarOpen(true);
   };
 
   const handleChangeCategory = (e) => {
@@ -83,6 +89,15 @@ export default function LimitsManagement() {
     dispatch(categoriesChanged());
     setCategory('');
     setLimit('');
+    setMessage('The limit has been successfully removed!');
+    setsnackBarOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackBarOpen(false);
   };
 
   return (
@@ -134,6 +149,11 @@ export default function LimitsManagement() {
           </Button>
         </Grid2>
       )}
+      <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
     </Grid2>
   );
 }

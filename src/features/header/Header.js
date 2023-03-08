@@ -23,7 +23,7 @@ export default function Header() {
       <Grid2 item>
         <MonthlySummary />
       </Grid2>
-      <Grid2 item>
+      <Grid2 item sx={{ width: '100%' }}>
         <StatusFilter />
       </Grid2>
       <Grid2 item>

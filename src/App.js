@@ -2,7 +2,7 @@ import PageHeader from './features/pageHeader/PageHeader';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-localStorage.clear();
+// localStorage.clear();
 
 function App() {
   return (

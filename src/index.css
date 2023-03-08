@@ -10,16 +10,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.income {
-  background-color: #5bab0b;
-}
-
-.expense {
-  background-color: #5e61dfbd;
-}
-
 .selectedCategory {
-  font-weight: bold;
+  opacity: 1 !important;
+  text-shadow: 0px 1px 9px #fff;
 }
 
 .show-percent-box {

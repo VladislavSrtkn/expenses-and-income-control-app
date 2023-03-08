@@ -1,4 +1,12 @@
-import { Button, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import {
+  Alert,
+  Button,
+  Snackbar,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from '@mui/material';
 import { HexColorPicker } from 'react-colorful';
 import { useState } from 'react';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
@@ -21,7 +29,7 @@ export default function CategoriesCreation() {
   const [color, setColor] = useState('#6032c1');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
-  const [isCreated, setIsCreated] = useState(false);
+  const [snackBarOpen, setsnackBarOpen] = useState(false);
 
   const categories = useSelector((state) => Object.values(state.categories.entities));
   const categoriesNames = categories.map((cat) => cat.name);
@@ -29,7 +37,6 @@ export default function CategoriesCreation() {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    setIsCreated(false);
     const trimmedName = name.trim();
     if (checkIsNameInvalid(trimmedName, categoriesNames)) {
       setNameError(checkIsNameInvalid(trimmedName, categoriesNames));
@@ -39,13 +46,19 @@ export default function CategoriesCreation() {
     createNewCategory(trimmedName, color, type);
     dispatch(categoriesChanged());
     setName('');
-    setIsCreated(true);
+    setsnackBarOpen(true);
   };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
     setNameError(false);
-    setIsCreated(false);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackBarOpen(false);
   };
 
   return (
@@ -59,30 +72,37 @@ export default function CategoriesCreation() {
       xs={10}
       margin='auto'
     >
-      <h4>Create your own categories!</h4>
+      <Typography component={'h4'} fontWeight='bold'>
+        Create your own categories!
+      </Typography>
       <Grid2 item>
-        <Typography py={3}>Choose a type:</Typography>
+        <Typography py={2}>1. Choose a type:</Typography>
         <ToggleButtonGroup color='primary' value={type} onChange={(e) => setType(e.target.value)}>
-          <ToggleButton value='expense'>expense</ToggleButton>
-          <ToggleButton value='income'>income</ToggleButton>
+          <ToggleButton sx={{ py: 0, px: 2 }} value='expense'>
+            expense
+          </ToggleButton>
+          <ToggleButton sx={{ py: 0, px: 2 }} value='income'>
+            income
+          </ToggleButton>
         </ToggleButtonGroup>
       </Grid2>
 
       <Grid2 item xs={12} sx={{ minHeight: '10rem' }}>
-        <Typography py={3}>Choose a name :</Typography>
+        <Typography py={2}>2. Enter name :</Typography>
         <TextField
           variant='standard'
+          size='small'
           value={name}
           label='Name'
           fullWidth
-          error={nameError}
-          helperText={nameError ? nameError : null}
+          error={Boolean(nameError)}
+          helperText={nameError ? nameError.toString() : null}
           onChange={(e) => handleNameChange(e)}
         />
       </Grid2>
 
       <Grid2 item display='flex' flexDirection='column' alignItems='center'>
-        <Typography py={3}>Pick a color:</Typography>
+        <Typography py={2}>3. Pick a color:</Typography>
         <HexColorPicker color={color} onChange={setColor} />
         <Button
           variant='outlined'
@@ -94,11 +114,11 @@ export default function CategoriesCreation() {
         </Button>
       </Grid2>
 
-      {isCreated && (
-        <Typography sx={{ borderRadius: '0.3rem', p: 1, mb: 3, bgcolor: '#4eaf3d', color: '#fff' }}>
-          You have successfully added a new category!
-        </Typography>
-      )}
+      <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+          Category has been successfully created!
+        </Alert>
+      </Snackbar>
     </Grid2>
   );
 }

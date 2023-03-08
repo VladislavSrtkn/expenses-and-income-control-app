@@ -1,33 +1,44 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
-const operationsAdapter = createEntityAdapter();
-const initialState = operationsAdapter.getInitialState();
+const initialState = {
+  entities: getOperationsFromStorage(),
+};
 
-export function saveNewOperation(text, amount, type, category, year, month, date) {
+function getOperationsFromStorage() {
+  return JSON.parse(localStorage.getItem('operations')) || {};
+}
+
+function setOperationsToStorage(operationsObj) {
+  const json = JSON.stringify(operationsObj);
+  localStorage.setItem('operations', json);
+}
+
+function saveNewOperation(text, amount, type, category, year, month, date) {
+  const operations = getOperationsFromStorage();
   const id = nanoid(15);
-  return { id, text, amount, type, category, year, month, date };
+  operations[id] = { id, text, amount, type, category, year, month, date };
+  setOperationsToStorage(operations);
+}
+
+function removeOperation(id) {
+  const operations = getOperationsFromStorage();
+  delete operations[id];
+  setOperationsToStorage(operations);
 }
 
 const operationsSlice = createSlice({
   name: 'operations',
   initialState,
   reducers: {
-    operationAdded: operationsAdapter.addOne,
-    operationDeleted: operationsAdapter.removeOne,
-    operationChanged: {
-      reducer(state, action) {
-        const { operationId, text, amount } = action.payload;
-        state.entities[operationId].text = text;
-        state.entities[operationId].amount = amount;
-      },
-      prepare(operationId, text, amount) {
-        return { payload: { operationId, text, amount } };
-      },
+    operationsChanged(state) {
+      state.entities = getOperationsFromStorage();
     },
   },
 });
 
-export const { operationAdded, operationDeleted, operationChanged } = operationsSlice.actions;
+export { saveNewOperation, removeOperation };
+
+export const { operationsChanged } = operationsSlice.actions;
 
 export default operationsSlice.reducer;

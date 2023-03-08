@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currencies } from '../filters/currencies';
 import { currencyChanged } from '../filters/filtersSlice';
+import { setCurrencyToStorage } from '../filters/filtersSlice';
 
 export default function CurrencyMenu() {
   const currentCurrency = useSelector((state) => state.filters.currency);
@@ -19,7 +20,8 @@ export default function CurrencyMenu() {
   const handleClose = () => setAnchorEl(null);
 
   const handlePick = (currency) => {
-    dispatch(currencyChanged(currency));
+    setCurrencyToStorage(currency);
+    dispatch(currencyChanged());
     setAnchorEl(null);
   };
 

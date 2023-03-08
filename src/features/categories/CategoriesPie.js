@@ -60,7 +60,12 @@ export default function CategoriesPie({ operationsType }) {
     .sort((a, b) => b.value - a.value);
 
   const cells = data.map((cat) => (
-    <Cell onClick={() => handleSwitchPickedCat(cat.id)} key={cat.id} fill={cat.color} />
+    <Cell
+      visibility={cat}
+      onClick={() => handleSwitchPickedCat(cat.id)}
+      key={cat.id}
+      fill={cat.color}
+    />
   ));
 
   const legend = data.map((cat) => (
@@ -80,7 +85,7 @@ export default function CategoriesPie({ operationsType }) {
 
       return matchedCat && matchedYear && matchedMonth;
     })
-    .sort((a, b) => b.date - a.date);
+    .sort((a, b) => (a.date >= b.date ? -1 : 1));
 
   const listInput = operationsWithSelectedCat.map((operation) => (
     <OperationShortItem key={operation.id} operation={operation} currency={currencyLabel} />

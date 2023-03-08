@@ -2,11 +2,12 @@ import { Box, Divider, IconButton, ListItem, ListItemText } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
-import { operationDeleted } from './operationsSlice';
+import { removeOperation, operationsChanged } from './operationsSlice';
 import { format } from 'date-fns';
 
 export default function OperationsListItem({ itemObj }) {
   const { id, text, amount, type, category, year, month, date } = itemObj;
+
   const dispatch = useDispatch();
   const currencyLabel = useSelector((state) => state.filters.currency.label);
   const categories = useSelector((state) => state.categories.entities);
@@ -14,7 +15,12 @@ export default function OperationsListItem({ itemObj }) {
   const catName = categories[category].name;
   const color = categories[category].color;
 
-  const handleDelete = () => dispatch(operationDeleted(id));
+  const displayedAmount = type === 'income' ? `+${amount}` : `-${amount}`;
+
+  const handleDelete = () => {
+    removeOperation(id);
+    dispatch(operationsChanged());
+  };
 
   const formattedDate = format(new Date(year, month, date), 'do MMM');
   return (
@@ -27,13 +33,9 @@ export default function OperationsListItem({ itemObj }) {
           justifyContent='space-between'
           xs={12}
         >
-          <Grid2 item xs={1}>
-            <Box sx={{ width: '1rem', height: '1rem', borderRadius: '50%' }} className={type}></Box>
-          </Grid2>
-
-          <Grid2 item xs={3}>
+          <Grid2 item xs={4}>
             <ListItemText
-              primary={`${amount}${currencyLabel}`}
+              primary={`${displayedAmount}${currencyLabel}`}
               sx={{ overflow: 'overlay' }}
               secondary={formattedDate}
             />
@@ -51,14 +53,14 @@ export default function OperationsListItem({ itemObj }) {
               component='div'
               sx={{
                 width: '1rem',
-                height: '1rem',
-                borderRadius: '0.3rem',
+                height: '0.5rem',
+                borderRadius: '1rem',
                 bgcolor: color,
               }}
             ></Box>
           </Grid2>
           <Grid2 item xs={1}>
-            <IconButton color='warning' onClick={handleDelete}>
+            <IconButton color='default' onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </Grid2>

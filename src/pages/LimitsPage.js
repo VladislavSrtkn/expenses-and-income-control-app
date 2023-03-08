@@ -19,13 +19,17 @@ export default function LimitsPage() {
           aria-label="Operation's status"
           sx={{ width: '-webkit-fill-available' }}
         >
-          <ToggleButton value='' onClick={(e) => setCurrentPage(e.target.value)} sx={{ flex: 1 }}>
+          <ToggleButton
+            value=''
+            onClick={(e) => setCurrentPage(e.target.value)}
+            sx={{ flex: 1, py: 0 }}
+          >
             List
           </ToggleButton>
           <ToggleButton
             value='manage'
             onClick={(e) => setCurrentPage(e.target.value)}
-            sx={{ flex: 1 }}
+            sx={{ flex: 1, py: 0 }}
           >
             Manage
           </ToggleButton>

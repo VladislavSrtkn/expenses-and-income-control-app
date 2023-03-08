@@ -11,8 +11,16 @@ export const currencies = {
     label: '£',
     name: 'gbp',
   },
+  cad: {
+    label: '$',
+    name: 'cad',
+  },
   jpy: {
     label: '¥',
     name: 'jpy',
+  },
+  uah: {
+    label: '₴',
+    name: 'uah',
   },
 };

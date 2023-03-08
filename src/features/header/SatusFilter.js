@@ -9,6 +9,8 @@ export default function StatusFilter() {
   const dispatch = useDispatch();
   const switchTypeFilter = (e) => dispatch(typeFilterChanged(e.target.value));
 
+  const style = { width: '33.33%', p: 0.1 };
+
   return (
     <ToggleButtonGroup
       color='primary'
@@ -16,15 +18,15 @@ export default function StatusFilter() {
       exclusive
       onChange={switchTypeFilter}
       aria-label="Operation's status"
-      sx={{ width: '-webkit-fill-available' }}
+      sx={{ width: '100%' }}
     >
-      <ToggleButton value='expense' sx={{ width: '33.33%' }}>
+      <ToggleButton value='expense' sx={style}>
         Expense
       </ToggleButton>
-      <ToggleButton value='income' sx={{ width: '33.33%' }}>
+      <ToggleButton value='income' sx={style}>
         Income
       </ToggleButton>
-      <ToggleButton value='all' sx={{ width: '33.33%' }}>
+      <ToggleButton value='all' sx={style}>
         All
       </ToggleButton>
     </ToggleButtonGroup>

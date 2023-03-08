@@ -12,16 +12,18 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
     if (cat.type === type) {
       return (
         <Box
-          key={i}
+          key={cat.id}
           className={selected}
           component='span'
           sx={{
+            opacity: 0.7,
             color: '#fff',
-            padding: '0.4em',
-            minWidth: 'initial',
-            borderRadius: '0.2em',
-            margin: '0.2em',
+            borderRadius: '0.9rem',
+            px: 2,
+            py: 0.3,
+            m: 0.4,
             bgcolor: cat.color,
+            fontSize: '0.8rem',
             ':hover': { cursor: 'pointer' },
           }}
           onClick={() => clickHandler(cat.id)}

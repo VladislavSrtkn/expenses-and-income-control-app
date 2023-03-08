@@ -18,7 +18,7 @@ export default function OperationsList() {
 
       return matchedYear && matchedMonth && matchedType;
     })
-    .sort((a, b) => b.date - a.date);
+    .sort((a, b) => (a.date >= b.date ? -1 : 1));
 
   const input = filteredOperations.map((item) => (
     <OperationsListItem key={item.id} itemObj={item} />
