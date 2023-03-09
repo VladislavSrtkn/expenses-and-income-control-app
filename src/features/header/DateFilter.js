@@ -26,6 +26,7 @@ export default function DateFilter() {
   const parsedDate = parse(`${year}-${month + 1}-01`, 'yyyy-MM-dd', new Date());
   console.log(parsedDate);
   const displayedDate = format(parsedDate, 'MMMM y');
+  console.log(displayedDate);
 
   return (
     <ButtonGroup variant='contained'>
