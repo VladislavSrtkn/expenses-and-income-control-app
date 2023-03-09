@@ -92,7 +92,7 @@ export default function CategoriesPie({ operationsType }) {
   ));
 
   return (
-    <Grid2 xs={12} item display='flex' flexDirection='column' alignItems='center'>
+    <Grid2 item display='flex' flexDirection='column' alignItems='center'>
       {Boolean(data.length) && (
         <>
           <PieChart width={280} height={200}>
@@ -113,7 +113,7 @@ export default function CategoriesPie({ operationsType }) {
           <Grid2 item display='flex' gap={1} flexWrap='wrap' sx={{ marginY: '1.5rem' }}>
             {legend}
           </Grid2>
-          <Grid2 item xs={12}>
+          <Grid2 item sx={{ width: '100%' }}>
             <List>{listInput}</List>
           </Grid2>
         </>

@@ -17,9 +17,8 @@ export default function TypeFilter() {
       color='primary'
       value={type}
       exclusive
+      fullWidth
       onChange={switchTypeFilter}
-      aria-label="Operation's status"
-      sx={{ width: '100%' }}
     >
       <ToggleButton value='expense' sx={style}>
         Expense

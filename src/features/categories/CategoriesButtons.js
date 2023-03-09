@@ -36,7 +36,7 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
   });
 
   return (
-    <Grid2 item display='flex' flexWrap='wrap' justifyContent='flex-start' xs={12}>
+    <Grid2 item display='flex' flexWrap='wrap' justifyContent='flex-start'>
       {categoriesButtons}
     </Grid2>
   );

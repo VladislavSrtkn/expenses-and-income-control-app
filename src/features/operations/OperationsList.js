@@ -25,7 +25,7 @@ export default function OperationsList() {
   ));
 
   return (
-    <Grid2 container justifyContent='center' xs={12} sm={8} md={3} margin='auto'>
+    <Grid2 container sx={{ m: 'auto', width: '100%', justifyContent: 'center' }}>
       <List sx={{ width: '100%' }}>{input}</List>
     </Grid2>
   );

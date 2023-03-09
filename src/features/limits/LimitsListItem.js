@@ -71,8 +71,10 @@ export default function LimitsListItem({ item, isOpen }) {
             component='div'
             height='1rem'
             borderRadius='0.5rem'
-            width={percent}
-            bgcolor={color}
+            sx={{
+              width: percent,
+              bgcolor: color,
+            }}
             className='show-percent-box'
           />
         </Box>

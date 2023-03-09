@@ -6,17 +6,7 @@ import MonthlySummary from './MonthlySummary';
 
 export default function Header() {
   return (
-    <Grid2
-      container
-      alignContent='center'
-      textAlign='center'
-      direction='column'
-      rowSpacing={2}
-      md={3}
-      px={2}
-      xs={12}
-      margin='auto'
-    >
+    <Grid2 container rowSpacing={2} textAlign='center' alignContent='center' direction='column'>
       <Grid2 item>
         <DateFilter />
       </Grid2>

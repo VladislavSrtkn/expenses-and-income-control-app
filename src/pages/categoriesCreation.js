@@ -62,16 +62,7 @@ export default function CategoriesCreation() {
   };
 
   return (
-    <Grid2
-      container
-      alignContent='center'
-      textAlign='center'
-      direction='column'
-      rowSpacing={2}
-      md={3}
-      xs={10}
-      margin='auto'
-    >
+    <Grid2 container alignContent='center' textAlign='center' direction='column' rowSpacing={2}>
       <Typography component={'h4'} fontWeight='bold'>
         Create your own categories!
       </Typography>
@@ -92,7 +83,7 @@ export default function CategoriesCreation() {
         </ToggleButtonGroup>
       </Grid2>
 
-      <Grid2 item xs={12} sx={{ minHeight: '10rem' }}>
+      <Grid2 item sx={{ minHeight: '10rem', width: '100%' }}>
         <Typography py={2}>2. Enter name :</Typography>
         <TextField
           variant='standard'

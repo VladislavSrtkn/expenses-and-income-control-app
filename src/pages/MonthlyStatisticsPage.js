@@ -10,8 +10,6 @@ export default function MonthlyStatisticsPage() {
     <Grid2
       container
       direction='column'
-      xs={12}
-      md={3}
       px={2}
       textAlign='center'
       margin='auto'

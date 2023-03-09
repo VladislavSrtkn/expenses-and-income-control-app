@@ -8,7 +8,7 @@ export default function LimitsPage() {
   const navigate = useNavigate();
 
   return (
-    <Grid2 container flexDirection='column' xs={10} md={3} margin='auto' textAlign='center'>
+    <Grid2 container flexDirection='column' textAlign='center'>
       <Grid2 item>
         <ToggleButtonGroup
           color='primary'

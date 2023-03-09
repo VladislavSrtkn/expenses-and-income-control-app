@@ -1,17 +1,27 @@
 import PageHeader from './features/pageHeader/PageHeader';
 import { Outlet } from 'react-router-dom';
-import { Box, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme from './customTheme';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 // localStorage.clear();
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ m: 'auto' }}>
+      <Grid2
+        container
+        flexDirection='column'
+        sx={{ m: 'auto' }}
+        px={2}
+        xs={12}
+        sm={6}
+        md={4}
+        lg={3}
+      >
         <PageHeader />
         <Outlet />
-      </Box>
+      </Grid2>
     </ThemeProvider>
   );
 }

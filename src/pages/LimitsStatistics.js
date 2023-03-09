@@ -9,7 +9,7 @@ export default function LimitsStatistics() {
       <Typography component='h3' py='1rem' mt='1rem' fontWeight='bold'>
         Limits Statistics
       </Typography>
-      <Grid2 item xs={12}>
+      <Grid2 item sx={{ width: '100%' }}>
         <DateFilter />
         <LimitsList />
       </Grid2>

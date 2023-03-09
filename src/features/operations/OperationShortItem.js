@@ -10,13 +10,7 @@ export default function OperationShortItem({ operation, currency }) {
   return (
     <>
       <ListItem sx={{ columnGap: 1, alignItems: 'flex-start' }}>
-        <Grid2
-          container
-          columnSpacing={1}
-          alignItems='center'
-          justifyContent='space-between'
-          xs={12}
-        >
+        <Grid2 container columnSpacing={1} alignItems='center' justifyContent='space-between'>
           <Grid2 item xs={6}>
             <ListItemText
               sx={{ minWidth: 'fit-content' }}
