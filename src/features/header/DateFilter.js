@@ -23,10 +23,8 @@ export default function DateFilter() {
   const setPreviousMonth = () => dispatch(dateFilterChanged(month - 1));
   const setNextMonth = () => dispatch(dateFilterChanged(month + 1));
 
-  const parsedDate = parse(`${year}-${month + 1}-01`, 'yyyy-MM-dd', new Date());
-  console.log(parsedDate);
+  const parsedDate = parse(`${year}-${month + 1}`, 'yyyy-M', new Date());
   const displayedDate = format(parsedDate, 'MMMM y');
-  console.log(displayedDate);
 
   return (
     <ButtonGroup variant='contained'>

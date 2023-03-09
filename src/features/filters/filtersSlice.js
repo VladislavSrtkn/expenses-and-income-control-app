@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { currencies } from './currencies';
+import parse from 'date-fns/parse';
 
 function getCurrencyFromStorage() {
   return JSON.parse(localStorage.getItem('currency'));
@@ -42,7 +43,7 @@ const filtersSlice = createSlice({
       state.currency = getCurrencyFromStorage();
     },
     dateFilterChanged(state, action) {
-      const newDate = new Date(Date.parse(`${state.date.year}-${state.date.month + 1}`));
+      const newDate = parse(`${state.date.year}-${state.date.month + 1}`, 'yyyy-M', new Date());
       const newMonth = action.payload;
       newDate.setMonth(newMonth);
 
