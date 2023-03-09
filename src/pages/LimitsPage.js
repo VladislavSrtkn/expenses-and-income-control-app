@@ -24,7 +24,7 @@ export default function LimitsPage() {
             onClick={(e) => setCurrentPage(e.target.value)}
             sx={{ flex: 1, py: 0 }}
           >
-            List
+            Limits
           </ToggleButton>
           <ToggleButton
             value='manage'

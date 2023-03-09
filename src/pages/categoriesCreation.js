@@ -26,7 +26,7 @@ function checkIsNameInvalid(input, names) {
 
 export default function CategoriesCreation() {
   const [type, setType] = useState('expense');
-  const [color, setColor] = useState('#6032c1');
+  const [color, setColor] = useState('#485edd');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
   const [snackBarOpen, setsnackBarOpen] = useState(false);
@@ -105,7 +105,7 @@ export default function CategoriesCreation() {
         <Typography py={2}>3. Pick a color:</Typography>
         <HexColorPicker color={color} onChange={setColor} />
         <Button
-          variant='outlined'
+          variant='contained'
           sx={{ marginY: '2rem' }}
           endIcon={<PlaylistAddCheckIcon />}
           onClick={handleSubmit}

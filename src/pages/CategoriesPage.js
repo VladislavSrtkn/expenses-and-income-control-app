@@ -11,7 +11,7 @@ export default function CategoriesPage() {
   return (
     <Grid2 container flexDirection='column' xs={10} md={3} margin='auto' textAlign='center'>
       <Typography component={'h3'} sx={{ fontWeight: 'bold', py: 3 }}>
-        Choose the categories you want to use!
+        Choose the categories you want to use:
       </Typography>
       <CategoriesList title='Income' categories={income} />
       <CategoriesList title='Expenses' categories={expense} />

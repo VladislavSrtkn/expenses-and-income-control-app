@@ -1,15 +1,18 @@
 import PageHeader from './features/pageHeader/PageHeader';
 import { Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
+import theme from './customTheme';
 
 // localStorage.clear();
 
 function App() {
   return (
-    <Box sx={{ m: 'auto' }}>
-      <PageHeader />
-      <Outlet />
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ m: 'auto' }}>
+        <PageHeader />
+        <Outlet />
+      </Box>
+    </ThemeProvider>
   );
 }
 

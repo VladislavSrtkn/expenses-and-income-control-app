@@ -1,5 +1,5 @@
 import DateFilter from './DateFilter';
-import StatusFilter from './SatusFilter';
+import TypeFilter from './TypeFilter';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import InputForNewOperations from './InputForNewOperations';
 import MonthlySummary from './MonthlySummary';
@@ -24,7 +24,7 @@ export default function Header() {
         <MonthlySummary />
       </Grid2>
       <Grid2 item sx={{ width: '100%' }}>
-        <StatusFilter />
+        <TypeFilter />
       </Grid2>
       <Grid2 item>
         <InputForNewOperations />

@@ -60,7 +60,7 @@ export default function OperationsListItem({ itemObj }) {
             ></Box>
           </Grid2>
           <Grid2 item xs={1}>
-            <IconButton color='default' onClick={handleDelete}>
+            <IconButton size='small' color='default' onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </Grid2>

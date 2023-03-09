@@ -113,7 +113,19 @@ export default function InputForNewOperations() {
             </Grid2>
 
             <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+              <MobileDatePicker
+                label='Date'
+                value={operationDate}
+                onChange={(newDate) => {
+                  setOperationDate(newDate);
+                }}
+                renderInput={(params) => <TextField size='small' variant='standard' {...params} />}
+              />
+            </Grid2>
+
+            <Grid2 item xs={12} sx={{ textAlign: 'left' }}>
               <TextField
+                fullWidth
                 size='small'
                 variant='standard'
                 label='Comment'
@@ -129,18 +141,7 @@ export default function InputForNewOperations() {
               />
             </Grid2>
 
-            <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
-              <MobileDatePicker
-                label='Date'
-                value={operationDate}
-                onChange={(newDate) => {
-                  setOperationDate(newDate);
-                }}
-                renderInput={(params) => <TextField size='small' variant='standard' {...params} />}
-              />
-            </Grid2>
-
-            <Grid2 item xs={6}>
+            <Grid2 item xs={6} sx={{ margin: 'auto' }}>
               <Button
                 onClick={addNewOpeartion}
                 variant='contained'

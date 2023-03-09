@@ -119,7 +119,7 @@ export default function LimitsManagement() {
           >
             {categoryOptions}
           </Select>
-          <FormHelperText>{categoryError ? 'Select category' : ''}</FormHelperText>
+          <FormHelperText>{categoryError ? 'Select category' : ' '}</FormHelperText>
         </FormControl>
       </Grid2>
       <Grid2 item xs={7}>
@@ -134,7 +134,7 @@ export default function LimitsManagement() {
             startAdornment={<InputAdornment position='start'>{currencyLabel}</InputAdornment>}
             onChange={handleChangeLimit}
           />
-          <FormHelperText>{limitError ? 'Invalid amount' : ''}</FormHelperText>
+          <FormHelperText>{limitError ? 'Invalid amount' : ' '}</FormHelperText>
         </FormControl>
       </Grid2>
       <Grid2 item xs={5}>

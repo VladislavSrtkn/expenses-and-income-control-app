@@ -1,26 +1,12 @@
 import { nanoid } from 'nanoid';
 
 const categoriesData = [
-  {
-    name: 'Other income',
-    color: '#88888b',
-    type: 'income',
-    visibility: true,
-    limit: 0,
-  },
   { name: 'Salary', color: '#4daf3c', type: 'income', visibility: true, limit: 0 },
   { name: 'Cashback', color: '#aa25e7', type: 'income', visibility: true, limit: 0 },
   {
     name: 'Interest on deposits',
-    color: '#6966ca',
+    color: '#3d8eac',
     type: 'income',
-    visibility: true,
-    limit: 0,
-  },
-  {
-    name: 'Other expenses',
-    color: '#88888b',
-    type: 'expense',
     visibility: true,
     limit: 0,
   },

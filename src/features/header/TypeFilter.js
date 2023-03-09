@@ -3,7 +3,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useSelector, useDispatch } from 'react-redux';
 import { typeFilterChanged } from '../filters/filtersSlice';
 
-export default function StatusFilter() {
+export default function TypeFilter() {
   const type = useSelector((state) => state.filters.type);
 
   const dispatch = useDispatch();

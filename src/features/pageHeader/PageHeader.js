@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -22,6 +22,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -68,6 +69,9 @@ export default function PageHeader() {
     setOpen(false);
   };
 
+  const theme = useTheme();
+  const iconsStyle = { color: theme.palette.primary.main };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -89,7 +93,7 @@ export default function PageHeader() {
             component='div'
             onClick={() => navigate('/')}
           >
-            MyBudget App
+            My Budget
           </Typography>
           <CurrencyMenu />
         </Toolbar>
@@ -114,53 +118,76 @@ export default function PageHeader() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          <ListItem disablePadding onClick={() => handleChangePage('/')}>
-            <ListItemButton>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary='Main page' />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding onClick={() => handleChangePage('categories')}>
-            <ListItemButton>
-              <ListItemIcon>
-                <ViewStreamIcon />
-              </ListItemIcon>
-              <ListItemText primary='My categories' />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding onClick={() => handleChangePage('categoriesCreation')}>
-            <ListItemButton>
-              <ListItemIcon>
-                <AddBoxIcon />
-              </ListItemIcon>
-              <ListItemText primary='Create category' />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding onClick={() => handleChangePage('monthlyStatistics')}>
-            <ListItemButton>
-              <ListItemIcon>
-                <CalendarMonthIcon />
-              </ListItemIcon>
-              <ListItemText primary='Monthly statistics' />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding onClick={() => handleChangePage('limits')}>
-            <ListItemButton>
-              <ListItemIcon>
-                <SavingsIcon />
-              </ListItemIcon>
-              <ListItemText primary='Limits' />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-        </List>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            flex: 'auto',
+          }}
+        >
+          <List>
+            <ListItem disablePadding onClick={() => handleChangePage('/')}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <HomeIcon sx={iconsStyle} />
+                </ListItemIcon>
+                <ListItemText primary='Main page' />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding onClick={() => handleChangePage('categories')}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ViewStreamIcon sx={iconsStyle} />
+                </ListItemIcon>
+                <ListItemText primary='My categories' />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding onClick={() => handleChangePage('categoriesCreation')}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AddBoxIcon sx={iconsStyle} />
+                </ListItemIcon>
+                <ListItemText primary='Create category' />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding onClick={() => handleChangePage('monthlyStatistics')}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CalendarMonthIcon sx={iconsStyle} />
+                </ListItemIcon>
+                <ListItemText primary='Monthly statistics' />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding onClick={() => handleChangePage('limits')}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <SavingsIcon sx={iconsStyle} />
+                </ListItemIcon>
+                <ListItemText primary='Limits' />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+          </List>
+
+          <Typography sx={{ fontSize: 14, p: 1 }}>
+            Made by{' '}
+            <Link
+              color='#000'
+              target='_blank'
+              href='https://github.com/VladislavSrtkn'
+              underline='hover'
+            >
+              Vladislav Sirotkin
+            </Link>{' '}
+            , 2023.
+          </Typography>
+        </Box>
       </Drawer>
       <div style={{ height: '5rem' }}></div>
     </Box>
