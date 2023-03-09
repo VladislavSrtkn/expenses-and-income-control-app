@@ -2,7 +2,7 @@
   "name": "redux-guide",
   "version": "0.1.0",
   "homepage": "https://VladislavSrtkn.github.io/expenses-and-income-control-app",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
