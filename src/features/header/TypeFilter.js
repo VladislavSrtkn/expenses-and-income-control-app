@@ -13,6 +13,7 @@ export default function TypeFilter() {
 
   return (
     <ToggleButtonGroup
+      size='small'
       color='primary'
       value={type}
       exclusive

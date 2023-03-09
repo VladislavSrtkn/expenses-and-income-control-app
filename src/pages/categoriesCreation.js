@@ -77,7 +77,12 @@ export default function CategoriesCreation() {
       </Typography>
       <Grid2 item>
         <Typography py={2}>1. Choose a type:</Typography>
-        <ToggleButtonGroup color='primary' value={type} onChange={(e) => setType(e.target.value)}>
+        <ToggleButtonGroup
+          color='primary'
+          size='small'
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
           <ToggleButton sx={{ py: 0, px: 2 }} value='expense'>
             expense
           </ToggleButton>

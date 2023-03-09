@@ -155,7 +155,7 @@ export default function InputForNewOperations() {
 
           <Grid2 item xs={12} sx={{ minHeight: '2.5rem' }}>
             {categoryError && (
-              <Typography component='span' sx={{ color: 'red' }}>
+              <Typography component='span' sx={{ color: 'red', fontSize: 12 }}>
                 Please choose category
               </Typography>
             )}

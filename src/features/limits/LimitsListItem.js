@@ -70,10 +70,10 @@ export default function LimitsListItem({ item, isOpen }) {
           <Box
             component='div'
             height='1rem'
+            borderRadius='0.5rem'
             width={percent}
             bgcolor={color}
             className='show-percent-box'
-            borderRadius='0.5rem'
           />
         </Box>
       </Collapse>
