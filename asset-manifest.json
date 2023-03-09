@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/expenses-and-income-control-app/static/css/main.8b693416.css",
-    "main.js": "/expenses-and-income-control-app/static/js/main.7ca30a29.js",
+    "main.js": "/expenses-and-income-control-app/static/js/main.4330f440.js",
     "index.html": "/expenses-and-income-control-app/index.html",
     "main.8b693416.css.map": "/expenses-and-income-control-app/static/css/main.8b693416.css.map",
-    "main.7ca30a29.js.map": "/expenses-and-income-control-app/static/js/main.7ca30a29.js.map"
+    "main.4330f440.js.map": "/expenses-and-income-control-app/static/js/main.4330f440.js.map"
   },
   "entrypoints": [
     "static/css/main.8b693416.css",
-    "static/js/main.7ca30a29.js"
+    "static/js/main.4330f440.js"
   ]
 }
