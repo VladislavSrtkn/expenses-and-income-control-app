@@ -4,6 +4,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { dateFilterChanged, dateFilterReseted } from '../filters/filtersSlice';
@@ -22,7 +23,9 @@ export default function DateFilter() {
   const setPreviousMonth = () => dispatch(dateFilterChanged(month - 1));
   const setNextMonth = () => dispatch(dateFilterChanged(month + 1));
 
-  const displayedDate = format(new Date(year, month), 'MMMM y');
+  const parsedDate = parse(`${year}-${month + 1}-01`, 'yyyy-MM-dd', new Date());
+  console.log(parsedDate);
+  const displayedDate = format(parsedDate, 'MMMM y');
 
   return (
     <ButtonGroup variant='contained'>
