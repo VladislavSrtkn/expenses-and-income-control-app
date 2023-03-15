@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 export default function MonthlySummary() {
@@ -33,8 +33,10 @@ export default function MonthlySummary() {
   });
 
   return (
-    <Typography>
-      {header} {monthlyTotal} {currencyLabel}
-    </Typography>
+    <Card sx={{ p: 1, mb: 1, bgcolor: '#1c2536', color: '#dcdcdc' }}>
+      <Typography sx={{ fontWeight: 600 }}>
+        {header} {monthlyTotal} {currencyLabel}
+      </Typography>
+    </Card>
   );
 }

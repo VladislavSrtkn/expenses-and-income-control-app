@@ -1,6 +1,7 @@
 import {
   Alert,
   Button,
+  Card,
   Snackbar,
   TextField,
   ToggleButton,
@@ -13,6 +14,7 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewCategory, categoriesChanged } from '../features/categories/categoriesSlice';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { Box } from '@mui/system';
 
 function checkIsNameInvalid(input, names) {
   if (input === '' || input.length > 20) {
@@ -61,57 +63,92 @@ export default function CategoriesCreation() {
     setsnackBarOpen(false);
   };
 
+  const toggleBtnStyle = {
+    width: '50%',
+    p: 0.3,
+    fontWeight: 600,
+    color: '#fff !important',
+    '&.Mui-selected': { color: '#1876d2 !important' },
+  };
+
+  const cardStyle = {
+    my: 2,
+    py: 3,
+    px: 1,
+    color: '#dcdcdc',
+    bgcolor: '#1c2536',
+    width: '100%',
+    backgroundImage: 'linear-gradient(168deg, #1c2536 65%, #3a4150 50%)',
+  };
+
   return (
     <Grid2 container alignContent='center' textAlign='center' direction='column' rowSpacing={2}>
-      <Typography component={'h4'} fontWeight='bold'>
-        Create your own categories!
-      </Typography>
-      <Grid2 item>
-        <Typography py={2}>1. Choose a type:</Typography>
+      <Card sx={cardStyle}>
+        <Typography sx={{ fontWeight: 600 }}>Choose a type:</Typography>
         <ToggleButtonGroup
           color='primary'
           size='small'
           value={type}
+          sx={{
+            bgcolor: '#1c2536de',
+            width: '100%',
+            mt: 1,
+            boxShadow: (theme) => theme.shadows[5],
+          }}
           onChange={(e) => setType(e.target.value)}
         >
-          <ToggleButton sx={{ py: 0, px: 2 }} value='expense'>
+          <ToggleButton sx={toggleBtnStyle} value='expense'>
             expense
           </ToggleButton>
-          <ToggleButton sx={{ py: 0, px: 2 }} value='income'>
+          <ToggleButton sx={toggleBtnStyle} value='income'>
             income
           </ToggleButton>
         </ToggleButtonGroup>
-      </Grid2>
+      </Card>
 
-      <Grid2 item sx={{ minHeight: '10rem', width: '100%' }}>
-        <Typography py={2}>2. Enter name :</Typography>
+      <Card
+        sx={{ ...cardStyle, backgroundImage: 'linear-gradient(168deg, #3a4150 65%, #1c2536 50%)' }}
+      >
+        <Typography sx={{ fontWeight: 600 }}>Enter name :</Typography>
         <TextField
           variant='standard'
           size='small'
           value={name}
           label='Name'
+          sx={{ label: { color: '#dcdcdc', fontSize: 14 }, input: { color: '#fff' } }}
           fullWidth
           error={Boolean(nameError)}
-          helperText={nameError ? nameError.toString() : null}
+          helperText={nameError ? nameError.toString() : ' '}
           onChange={(e) => handleNameChange(e)}
         />
-      </Grid2>
+      </Card>
 
-      <Grid2 item display='flex' flexDirection='column' alignItems='center'>
-        <Typography py={2}>3. Pick a color:</Typography>
-        <HexColorPicker color={color} onChange={setColor} />
-        <Button
-          variant='contained'
-          sx={{ marginY: '2rem' }}
-          endIcon={<PlaylistAddCheckIcon />}
-          onClick={handleSubmit}
-        >
-          Add
-        </Button>
-      </Grid2>
+      <Card sx={{ ...cardStyle, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography sx={{ fontWeight: 600 }}>Pick a color:</Typography>
+        <HexColorPicker
+          style={{
+            width: '80%',
+            marginTop: '0.8rem',
+            boxShadow: '9px -9px 0px 0px #3a404f',
+            borderRadius: '9px',
+          }}
+          color={color}
+          onChange={setColor}
+        />
+      </Card>
+
+      <Button
+        variant='contained'
+        color='secondary'
+        sx={{ marginY: '2rem', maxWidth: '8rem', alignSelf: 'center' }}
+        endIcon={<PlaylistAddCheckIcon />}
+        onClick={handleSubmit}
+      >
+        Add
+      </Button>
 
       <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+        <Alert variant='filled' onClose={handleClose} severity='success'>
           Category has been successfully created!
         </Alert>
       </Snackbar>

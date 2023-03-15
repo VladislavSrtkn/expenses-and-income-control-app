@@ -4,7 +4,7 @@ import CategoriesPie from '../features/categories/CategoriesPie';
 import DateFilter from '../features/header/DateFilter';
 
 export default function MonthlyStatisticsPage() {
-  const style = { py: 3, fontWeight: 'bold' };
+  const style = { py: 3, fontWeight: 'bold', color: '#dcdcdc' };
 
   return (
     <Grid2

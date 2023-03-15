@@ -9,12 +9,18 @@ export default function TypeFilter() {
   const dispatch = useDispatch();
   const switchTypeFilter = (e) => dispatch(typeFilterChanged(e.target.value));
 
-  const style = { width: '33.33%', p: 0.1 };
+  const style = {
+    width: '33.33%',
+    p: 0.3,
+    fontWeight: 600,
+    color: '#fff',
+    '&.Mui-selected': { color: '#1876d2' },
+  };
 
   return (
     <ToggleButtonGroup
       size='small'
-      color='primary'
+      sx={{ bgcolor: '#1c2536de', boxShadow: (theme) => theme.shadows[5] }}
       value={type}
       exclusive
       fullWidth

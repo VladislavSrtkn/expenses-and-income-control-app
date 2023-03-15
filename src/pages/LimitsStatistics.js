@@ -6,7 +6,7 @@ import LimitsList from '../features/limits/LimitsList';
 export default function LimitsStatistics() {
   return (
     <Grid2 container flexDirection='column' rowSpacing={3} columnSpacing={1} alignItems='center'>
-      <Typography component='h3' py='1rem' mt='1rem' fontWeight='bold'>
+      <Typography component='h3' sx={{ mt: 5, fontWeight: 600, color: '#dcdcdc' }}>
         Limits Statistics
       </Typography>
       <Grid2 item sx={{ width: '100%' }}>

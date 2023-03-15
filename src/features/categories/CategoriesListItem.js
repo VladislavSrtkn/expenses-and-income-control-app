@@ -16,13 +16,20 @@ export default function CategoriesListItem({ category }) {
     <>
       <ListItem sx={{ alignItems: 'center' }}>
         <Checkbox
-          color='success'
+          color='default'
+          sx={{
+            color: '#fff',
+            '&.Mui-checked': { color: '#dcdcdc' },
+          }}
           size='small'
           checked={visibility}
           onChange={() => handleChangeVisibility(id)}
         />
 
-        <ListItemText primaryTypographyProps={{ fontSize: '0.8rem' }} primary={name} />
+        <ListItemText
+          primaryTypographyProps={{ fontSize: '0.8rem', fontWeight: 600 }}
+          primary={name}
+        />
         <Box
           component='span'
           sx={{ bgcolor: color, width: '15%', height: '0.5rem', borderRadius: '1rem' }}

@@ -17,7 +17,7 @@ export default function LimitsPage() {
           exclusive
           onChange={(e) => navigate(e.target.value)}
           aria-label="Operation's status"
-          sx={{ width: '-webkit-fill-available' }}
+          sx={{ width: '100%', bgcolor: '#1c2536de', boxShadow: (theme) => theme.shadows[5] }}
         >
           <ToggleButton
             value=''

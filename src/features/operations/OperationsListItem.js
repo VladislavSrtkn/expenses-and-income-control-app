@@ -25,7 +25,13 @@ export default function OperationsListItem({ itemObj }) {
   const formattedDate = format(new Date(year, month, date), 'do MMM');
   return (
     <>
-      <ListItem>
+      <ListItem
+        sx={{
+          '& .MuiTypography-root': {
+            color: '#dfdfdf',
+          },
+        }}
+      >
         <Grid2
           container
           columnSpacing={1}
@@ -36,7 +42,12 @@ export default function OperationsListItem({ itemObj }) {
           <Grid2 item xs={4}>
             <ListItemText
               primary={`${displayedAmount}${currencyLabel}`}
-              sx={{ overflow: 'overlay' }}
+              sx={{
+                overflow: 'overlay',
+                '& .MuiListItemText-primary': {
+                  fontWeight: 600,
+                },
+              }}
               secondary={formattedDate}
             />
           </Grid2>
@@ -45,7 +56,17 @@ export default function OperationsListItem({ itemObj }) {
             <ListItemText
               primary={text}
               secondary={catName}
-              sx={{ overflow: 'overlay', fontSize: '0.7rem' }}
+              sx={{
+                overflow: 'overlay',
+                fontSize: '0.7rem',
+                '& .MuiListItemText-primary': {
+                  fontSize: 12,
+                },
+                '& .MuiListItemText-secondary': {
+                  fontWeight: 600,
+                  fontSize: 13,
+                },
+              }}
             />
           </Grid2>
           <Grid2 item xs={1}>
@@ -60,7 +81,7 @@ export default function OperationsListItem({ itemObj }) {
             ></Box>
           </Grid2>
           <Grid2 item xs={1}>
-            <IconButton size='small' color='default' onClick={handleDelete}>
+            <IconButton size='small' sx={{ color: '#dcdcdc' }} onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </Grid2>

@@ -4,7 +4,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import CategoryLegendButton from './CategoryLegendButton';
 import { useState } from 'react';
 import OperationShortItem from '../operations/OperationShortItem';
-import { List } from '@mui/material';
+import { Card, List, Typography } from '@mui/material';
 
 function addSumForCategories(year, month, type, operations, categories) {
   const categoriesCopy = { ...categories };
@@ -65,6 +65,7 @@ export default function CategoriesPie({ operationsType }) {
       onClick={() => handleSwitchPickedCat(cat.id)}
       key={cat.id}
       fill={cat.color}
+      stroke={null}
     />
   ));
 
@@ -91,34 +92,39 @@ export default function CategoriesPie({ operationsType }) {
     <OperationShortItem key={operation.id} operation={operation} currency={currencyLabel} />
   ));
 
-  return (
-    <Grid2 item display='flex' flexDirection='column' alignItems='center'>
-      {Boolean(data.length) && (
-        <>
-          <PieChart width={280} height={200}>
-            <Pie
-              data={data}
-              innerRadius={60}
-              outerRadius={80}
-              fill='#8884d8'
-              paddingAngle={5}
-              dataKey='value'
-              nameKey='name'
-              labelLine={false}
-            >
-              {cells}
-            </Pie>
-          </PieChart>
+  if (!data.length) {
+    return <Typography sx={{ color: '#dcdcdc', fontSize: 14 }}>{noOperationsText}</Typography>;
+  }
 
-          <Grid2 item display='flex' gap={1} flexWrap='wrap' sx={{ marginY: '1.5rem' }}>
-            {legend}
-          </Grid2>
-          <Grid2 item sx={{ width: '100%' }}>
-            <List>{listInput}</List>
-          </Grid2>
-        </>
-      )}
-      {!data.length && <p>{noOperationsText}</p>}
-    </Grid2>
+  return (
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundImage: 'linear-gradient(158deg, #3a4150 200px, #1c2536 200px)',
+      }}
+    >
+      <PieChart width={280} height={200}>
+        <Pie
+          data={data}
+          innerRadius={60}
+          outerRadius={80}
+          fill='#8884d8'
+          paddingAngle={5}
+          dataKey='value'
+          nameKey='name'
+          labelLine={false}
+        >
+          {cells}
+        </Pie>
+      </PieChart>
+      <Grid2 item display='flex' gap={1} flexWrap='wrap' sx={{ marginY: '1.5rem' }}>
+        {legend}
+      </Grid2>
+      <Grid2 item sx={{ width: '100%' }}>
+        <List>{listInput}</List>
+      </Grid2>
+    </Card>
   );
 }

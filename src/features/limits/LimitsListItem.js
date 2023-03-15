@@ -1,4 +1,4 @@
-import { Collapse, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { Card, Collapse, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { ExpandLess } from '@mui/icons-material';
 import { ExpandMore } from '@mui/icons-material';
 import { useState } from 'react';
@@ -44,41 +44,68 @@ export default function LimitsListItem({ item, isOpen }) {
 
   return (
     <>
-      <ListItemButton onClick={handleClick}>
-        <ListItemText primary={name} sx={{ width: '50%' }} />
-        <ListItemText primary={`${limit}${currencyLabel}`} />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
+      <Card
+        sx={{
+          color: '#dcdcdc',
+          bgcolor: '#1c2536',
+          width: '100%',
+          backgroundImage: 'linear-gradient(160deg, #3a4150 90px, #1c2536 90px)',
+          my: 2,
+        }}
+      >
+        <ListItemButton onClick={handleClick}>
+          <ListItemText
+            primary={name}
+            sx={{
+              width: '50%',
+              '& .MuiListItemText-primary': {
+                fontWeight: 600,
+                fontSize: 15,
+              },
+            }}
+          />
+          <ListItemText
+            sx={{
+              '& .MuiListItemText-primary': {
+                fontWeight: 600,
+                fontSize: 15,
+              },
+            }}
+            primary={`${limit}${currencyLabel}`}
+          />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
 
-      <Collapse in={open} timeout='auto' unmountOnExit sx={{ paddingX: '1rem' }}>
-        <Typography textAlign='start' my='1rem'>
-          Spent: {expenses}
-          {currencyLabel}
-        </Typography>
+        <Collapse in={open} timeout='auto' unmountOnExit sx={{ paddingX: '1rem' }}>
+          <Typography textAlign='start' sx={{ my: 1, fontSize: 15 }}>
+            Spent: {expenses}
+            {currencyLabel}
+          </Typography>
 
-        <Typography textAlign='start' my='1rem' fontWeight='bold'>
-          {displayedBalance}
-        </Typography>
-        <Box
-          component='div'
-          height='1rem'
-          my={3}
-          boxSizing='content-box'
-          borderRadius='0.5rem'
-          bgcolor='#d9d9d9ba'
-        >
+          <Typography textAlign='start' sx={{ my: 1, fontSize: 15, fontWeight: 600 }}>
+            {displayedBalance}
+          </Typography>
           <Box
             component='div'
             height='1rem'
+            my={3}
+            boxSizing='content-box'
             borderRadius='0.5rem'
-            sx={{
-              width: percent,
-              bgcolor: color,
-            }}
-            className='show-percent-box'
-          />
-        </Box>
-      </Collapse>
+            bgcolor='#d9d9d9ba'
+          >
+            <Box
+              component='div'
+              height='1rem'
+              borderRadius='0.5rem'
+              sx={{
+                width: percent,
+                bgcolor: color,
+              }}
+              className='show-percent-box'
+            />
+          </Box>
+        </Collapse>
+      </Card>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { List } from '@mui/material';
+import { Card, List } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useSelector } from 'react-redux';
 import OperationsListItem from './OperationsListItem';
@@ -25,8 +25,12 @@ export default function OperationsList() {
   ));
 
   return (
-    <Grid2 container sx={{ m: 'auto', width: '100%', justifyContent: 'center' }}>
-      <List sx={{ width: '100%' }}>{input}</List>
+    <Grid2 container sx={{ m: 'auto', mt: 1, width: '100%', justifyContent: 'center' }}>
+      <List sx={{ width: '100%' }}>
+        <Card sx={{ backgroundImage: 'linear-gradient(150deg, #1c2536 50%, #3a4150 50%)' }}>
+          {input}
+        </Card>
+      </List>
     </Grid2>
   );
 }

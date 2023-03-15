@@ -45,7 +45,7 @@ export default function CurrencyMenu() {
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{ color: '#fff' }}
+        sx={{ color: '#dcdcdc' }}
       >
         {currentCurrency.name}
       </Button>

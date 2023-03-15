@@ -15,6 +15,8 @@ export default function CategoryLegendButton({ category, currencyLabel, clickHan
           m: 0.3,
           height: 'max-content',
           fontSize: '0.8rem',
+          fontWeight: 600,
+          color: '#fff',
           cursor: 'pointer',
         }}
         onClick={() => clickHandler(id)}

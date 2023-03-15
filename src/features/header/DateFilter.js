@@ -27,18 +27,28 @@ export default function DateFilter() {
   const displayedDate = format(parsedDate, 'MMMM y');
 
   return (
-    <ButtonGroup variant='contained'>
+    <ButtonGroup variant='text' sx={{ my: 3 }}>
       <IconButton onClick={setPreviousMonth}>
-        <ArrowBackIosIcon />
+        <ArrowBackIosIcon sx={{ color: '#dcdcdc' }} />
       </IconButton>
       <Paper
-        elevation={0}
-        sx={{ minWidth: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        sx={{
+          minWidth: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 600,
+          bgcolor: '#1c2536',
+          backgroundImage: 'linear-gradient(to right, #3b4150 0%, #1c2536 51%, #3a404f 100%)',
+          backgroundSize: '200% auto',
+          color: '#dcdcdc',
+          borderRadius: '4px',
+        }}
       >
-        <span>{displayedDate}</span>
+        {displayedDate}
       </Paper>
       <IconButton onClick={setNextMonth}>
-        <ArrowForwardIosIcon />
+        <ArrowForwardIosIcon sx={{ color: '#dcdcdc' }} />
       </IconButton>
     </ButtonGroup>
   );

@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useSelector } from 'react-redux';
+import { Card } from '@mui/material';
 
 export default function CategoriesButtons({ clickHandler, pickedCat }) {
   const type = useSelector((state) => state.filters.type);
@@ -16,7 +16,6 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
           className={selected}
           component='span'
           sx={{
-            opacity: 0.7,
             color: '#fff',
             borderRadius: '0.9rem',
             px: 2,
@@ -24,6 +23,7 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
             m: 0.4,
             bgcolor: cat.color,
             fontSize: '0.8rem',
+            fontWeight: 600,
             ':hover': { cursor: 'pointer' },
           }}
           onClick={() => clickHandler(cat.id)}
@@ -36,8 +36,18 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
   });
 
   return (
-    <Grid2 item display='flex' flexWrap='wrap' justifyContent='flex-start'>
+    <Card
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+        px: 1,
+        py: 2,
+        my: 1,
+        backgroundImage: 'linear-gradient(45deg, #1c2536 50%, #3a4150 50%)',
+      }}
+    >
       {categoriesButtons}
-    </Grid2>
+    </Card>
   );
 }

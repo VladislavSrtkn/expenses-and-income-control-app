@@ -7,9 +7,9 @@ import {
   InputAdornment,
   Button,
   FormHelperText,
-  Typography,
   Snackbar,
   Alert,
+  Card,
 } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useState } from 'react';
@@ -102,55 +102,88 @@ export default function LimitsManagement() {
 
   return (
     <Grid2 container flexDirection='column' rowSpacing={3} columnSpacing={1} alignItems='center'>
-      <Grid2 item>
-        <Typography component={'h3'} sx={{ py: 3 }}>
-          Create or change your limits!
-        </Typography>
-      </Grid2>
+      <Card
+        sx={{
+          width: '100%',
+          my: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(160deg, #3a4150 90px, #1c2536 90px)',
+        }}
+      >
+        <Grid2 item xs={7} sx={{ mt: 2 }}>
+          <FormControl fullWidth error={categoryError}>
+            <InputLabel sx={{ color: '#dcdcdc' }} htmlFor='category-select'>
+              Category
+            </InputLabel>
+            <Select
+              id='category-select'
+              value={category}
+              label='Category'
+              sx={{
+                '& .MuiOutlinedInput-input': { color: '#fff' },
+                '& fieldset': {
+                  borderColor: '#dcdcdc',
+                },
+                '& svg': {
+                  color: '#dcdcdc',
+                },
+              }}
+              onChange={handleChangeCategory}
+            >
+              {categoryOptions}
+            </Select>
+            <FormHelperText>{categoryError ? 'Select category' : ' '}</FormHelperText>
+          </FormControl>
+        </Grid2>
 
-      <Grid2 item xs={7}>
-        <FormControl fullWidth error={categoryError}>
-          <InputLabel htmlFor='category-select'>Category</InputLabel>
-          <Select
-            id='category-select'
-            value={category}
-            label='Category'
-            onChange={handleChangeCategory}
-          >
-            {categoryOptions}
-          </Select>
-          <FormHelperText>{categoryError ? 'Select category' : ' '}</FormHelperText>
-        </FormControl>
-      </Grid2>
-      <Grid2 item xs={7}>
-        <FormControl fullWidth error={limitError}>
-          <InputLabel htmlFor='limit'>Limit</InputLabel>
-          <OutlinedInput
-            id='limit'
-            type='number'
-            label='Limit'
-            value={limit}
-            error={limitError}
-            startAdornment={<InputAdornment position='start'>{currencyLabel}</InputAdornment>}
-            onChange={handleChangeLimit}
-          />
-          <FormHelperText>{limitError ? 'Invalid amount' : ' '}</FormHelperText>
-        </FormControl>
-      </Grid2>
+        <Grid2 item xs={7}>
+          <FormControl fullWidth error={limitError}>
+            <InputLabel sx={{ color: '#dcdcdc' }} htmlFor='limit'>
+              Limit
+            </InputLabel>
+            <OutlinedInput
+              id='limit'
+              type='number'
+              label='Limit'
+              value={limit}
+              error={limitError}
+              sx={{
+                '& .MuiOutlinedInput-input': { color: '#fff' },
+                '& fieldset': {
+                  borderColor: '#dcdcdc',
+                },
+              }}
+              startAdornment={
+                <InputAdornment
+                  sx={{ '& .MuiTypography-root': { color: '#1976d2' } }}
+                  position='start'
+                >
+                  {currencyLabel}
+                </InputAdornment>
+              }
+              onChange={handleChangeLimit}
+            />
+            <FormHelperText>{limitError ? 'Invalid amount' : ' '}</FormHelperText>
+          </FormControl>
+        </Grid2>
+      </Card>
+
       <Grid2 item xs={5}>
-        <Button variant='contained' size='large' onClick={handleSetLimit}>
+        <Button variant='contained' color='secondary' size='large' onClick={handleSetLimit}>
           Set limit
         </Button>
       </Grid2>
       {showRemoveButton && (
         <Grid2 item xs={5}>
-          <Button variant='contained' size='large' onClick={handleRemoveLimit}>
+          <Button variant='contained' size='large' onClick={handleRemoveLimit} color='secondary'>
             Remove
           </Button>
         </Grid2>
       )}
       <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+        <Alert variant='filled' onClose={handleClose} severity='success'>
           {message}
         </Alert>
       </Snackbar>
