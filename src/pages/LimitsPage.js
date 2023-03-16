@@ -7,6 +7,15 @@ export default function LimitsPage() {
   const [currentPage, setCurrentPage] = useState('');
   const navigate = useNavigate();
 
+  const style = {
+    width: '50%',
+    p: 0.3,
+    fontWeight: 600,
+    border: 0,
+    color: '#fff',
+    '&.Mui-selected': { color: '#1876d2' },
+  };
+
   return (
     <Grid2 container flexDirection='column' textAlign='center'>
       <Grid2 item>
@@ -19,18 +28,10 @@ export default function LimitsPage() {
           aria-label="Operation's status"
           sx={{ width: '100%', bgcolor: '#1c2536de', boxShadow: (theme) => theme.shadows[5] }}
         >
-          <ToggleButton
-            value=''
-            onClick={(e) => setCurrentPage(e.target.value)}
-            sx={{ flex: 1, py: 0 }}
-          >
+          <ToggleButton value='' onClick={(e) => setCurrentPage(e.target.value)} sx={style}>
             Limits
           </ToggleButton>
-          <ToggleButton
-            value='manage'
-            onClick={(e) => setCurrentPage(e.target.value)}
-            sx={{ flex: 1, py: 0 }}
-          >
+          <ToggleButton value='manage' onClick={(e) => setCurrentPage(e.target.value)} sx={style}>
             Manage
           </ToggleButton>
         </ToggleButtonGroup>

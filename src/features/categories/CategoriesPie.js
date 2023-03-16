@@ -71,6 +71,7 @@ export default function CategoriesPie({ operationsType }) {
 
   const legend = data.map((cat) => (
     <CategoryLegendButton
+      className={cat.id === pickedCat ? 'selectedCategory' : null}
       key={cat.id}
       category={cat}
       currencyLabel={currencyLabel}
@@ -99,6 +100,7 @@ export default function CategoriesPie({ operationsType }) {
   return (
     <Card
       sx={{
+        px: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -119,7 +121,7 @@ export default function CategoriesPie({ operationsType }) {
           {cells}
         </Pie>
       </PieChart>
-      <Grid2 item display='flex' gap={1} flexWrap='wrap' sx={{ marginY: '1.5rem' }}>
+      <Grid2 sx={{ width: '100%', display: 'flex', gap: 1, flexWrap: 'wrap', marginY: '1.5rem' }}>
         {legend}
       </Grid2>
       <Grid2 item sx={{ width: '100%' }}>

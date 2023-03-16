@@ -168,20 +168,21 @@ export default function LimitsManagement() {
             <FormHelperText>{limitError ? 'Invalid amount' : ' '}</FormHelperText>
           </FormControl>
         </Grid2>
-      </Card>
 
-      <Grid2 item xs={5}>
-        <Button variant='contained' color='secondary' size='large' onClick={handleSetLimit}>
-          Set limit
-        </Button>
-      </Grid2>
-      {showRemoveButton && (
         <Grid2 item xs={5}>
-          <Button variant='contained' size='large' onClick={handleRemoveLimit} color='secondary'>
-            Remove
+          <Button variant='contained' color='secondary' size='large' onClick={handleSetLimit}>
+            Set limit
           </Button>
         </Grid2>
-      )}
+        {showRemoveButton && (
+          <Grid2 item xs={5}>
+            <Button variant='contained' size='large' onClick={handleRemoveLimit} color='secondary'>
+              Remove
+            </Button>
+          </Grid2>
+        )}
+      </Card>
+
       <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
         <Alert variant='filled' onClose={handleClose} severity='success'>
           {message}

@@ -1,6 +1,5 @@
-import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
 
 export default function CategoriesButtons({ clickHandler, pickedCat }) {
   const type = useSelector((state) => state.filters.type);
@@ -11,7 +10,7 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
     const selected = pickedCat === cat.id ? 'selectedCategory' : null;
     if (cat.type === type) {
       return (
-        <Box
+        <Button
           key={cat.id}
           className={selected}
           component='span'
@@ -19,17 +18,17 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
             color: '#fff',
             borderRadius: '0.9rem',
             px: 2,
-            py: 0.3,
-            m: 0.4,
+            py: 0.1,
+            m: 0.5,
             bgcolor: cat.color,
-            fontSize: '0.8rem',
+            fontSize: 11,
             fontWeight: 600,
             ':hover': { cursor: 'pointer' },
           }}
           onClick={() => clickHandler(cat.id)}
         >
           {cat.name}
-        </Box>
+        </Button>
       );
     }
     return null;

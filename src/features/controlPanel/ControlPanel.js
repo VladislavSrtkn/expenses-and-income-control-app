@@ -4,7 +4,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import InputForNewOperations from './InputForNewOperations';
 import MonthlySummary from './MonthlySummary';
 
-export default function Header() {
+export default function ControlPanel() {
   return (
     <Grid2 container rowSpacing={2} textAlign='center' alignContent='center' direction='column'>
       <Grid2 item>

@@ -1,12 +1,13 @@
-import { Box } from '@mui/material';
+import { Button } from '@mui/material';
 
-export default function CategoryLegendButton({ category, currencyLabel, clickHandler }) {
+export default function CategoryLegendButton({ category, currencyLabel, clickHandler, className }) {
   const { id, name, value, color } = category;
 
   return (
     <>
-      <Box
+      <Button
         component='span'
+        className={className}
         sx={{
           bgcolor: color,
           borderRadius: '0.9rem',
@@ -14,15 +15,18 @@ export default function CategoryLegendButton({ category, currencyLabel, clickHan
           py: 0.3,
           m: 0.3,
           height: 'max-content',
-          fontSize: '0.8rem',
+          fontSize: 11,
           fontWeight: 600,
           color: '#fff',
           cursor: 'pointer',
+          ':hover': {
+            bgcolor: color,
+          },
         }}
         onClick={() => clickHandler(id)}
       >
         {name} {value} {currencyLabel}
-      </Box>
+      </Button>
     </>
   );
 }

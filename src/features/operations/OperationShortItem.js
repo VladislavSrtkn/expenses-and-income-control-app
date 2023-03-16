@@ -55,7 +55,7 @@ export default function OperationShortItem({ operation, currency }) {
           </Grid2>
         </Grid2>
       </ListItem>
-      <Divider sx={{ '&.MuiDivider-root': { borderColor: '#605d5d8c' } }} />
+      <Divider />
     </>
   );
 }

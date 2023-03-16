@@ -92,6 +92,7 @@ export default function LimitsListItem({ item, isOpen }) {
             boxSizing='content-box'
             borderRadius='0.5rem'
             bgcolor='#d9d9d9ba'
+            overflow='hidden'
           >
             <Box
               component='div'

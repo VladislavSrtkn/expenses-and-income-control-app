@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import CategoriesPie from '../features/categories/CategoriesPie';
-import DateFilter from '../features/header/DateFilter';
+import DateFilter from '../features/controlPanel/DateFilter';
 
 export default function MonthlyStatisticsPage() {
   const style = { py: 3, fontWeight: 'bold', color: '#dcdcdc' };

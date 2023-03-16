@@ -4,8 +4,6 @@ import { ThemeProvider } from '@mui/material';
 import theme from './customTheme';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-// localStorage.clear();
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -18,6 +16,7 @@ function App() {
         sm={6}
         md={4}
         lg={3}
+        pb={5}
       >
         <PageHeader />
         <Outlet />

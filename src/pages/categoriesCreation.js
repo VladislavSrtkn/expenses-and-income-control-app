@@ -14,7 +14,6 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewCategory, categoriesChanged } from '../features/categories/categoriesSlice';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { Box } from '@mui/system';
 
 function checkIsNameInvalid(input, names) {
   if (input === '' || input.length > 20) {
@@ -67,6 +66,7 @@ export default function CategoriesCreation() {
     width: '50%',
     p: 0.3,
     fontWeight: 600,
+    border: 0,
     color: '#fff !important',
     '&.Mui-selected': { color: '#1876d2 !important' },
   };

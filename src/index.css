@@ -13,6 +13,7 @@ code {
 
 .selectedCategory {
   text-shadow: 0px 1px 9px #fff;
+  background-color: transparent !important;
 }
 
 .show-percent-box {

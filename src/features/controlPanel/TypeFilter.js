@@ -13,6 +13,7 @@ export default function TypeFilter() {
     width: '33.33%',
     p: 0.3,
     fontWeight: 600,
+    border: 0,
     color: '#fff',
     '&.Mui-selected': { color: '#1876d2' },
   };
