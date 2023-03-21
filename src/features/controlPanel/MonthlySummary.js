@@ -1,12 +1,20 @@
 import { Card, Typography } from '@mui/material';
+
 import { useSelector } from 'react-redux';
+import {
+  selectFilterCurrencyLabel,
+  selectFilterDate,
+  selectFilterType,
+} from '../filters/filtersSlice';
+import { selectAllOperations } from '../operations/operationsSlice';
 
 export default function MonthlySummary() {
-  const filterType = useSelector((state) => state.filters.type);
-  const filterDate = useSelector((state) => state.filters.date);
+  const filterType = useSelector(selectFilterType);
+  const filterDate = useSelector(selectFilterDate);
   const { year, month } = filterDate;
-  const operations = useSelector((state) => Object.values(state.operations.entities));
-  const currencyLabel = useSelector((state) => state.filters.currency.label);
+
+  const operations = useSelector(selectAllOperations);
+  const currencyLabel = useSelector(selectFilterCurrencyLabel);
 
   let monthlyTotal = 0;
   let header =

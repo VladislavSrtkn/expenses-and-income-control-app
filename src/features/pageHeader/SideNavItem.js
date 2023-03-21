@@ -2,12 +2,12 @@ import { ButtonBase } from '@mui/material';
 import { Box } from '@mui/system';
 
 export default function SideNavItem(props) {
-  const { active = false, icon, title, path, clickHandler } = props;
+  const { active = false, icon, title, path, onClick } = props;
 
   return (
     <li>
       <ButtonBase
-        onClick={() => clickHandler(path)}
+        onClick={() => onClick(path)}
         sx={{
           alignItems: 'center',
           borderRadius: 1,

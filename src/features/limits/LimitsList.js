@@ -1,14 +1,17 @@
 import { List } from '@mui/material';
+
 import { useSelector } from 'react-redux';
+import { selectAllCategories } from '../categories/categoriesSlice';
+
 import LimitsListItem from './LimitsListItem';
 
 export default function LimitsList() {
-  const categories = useSelector((state) => Object.values(state.categories.entities));
+  const categories = useSelector(selectAllCategories);
   const categoriesWithLimits = categories.filter((cat) => cat.limit > 0);
 
-  const input = categoriesWithLimits.map((cat, index) => (
+  const limits = categoriesWithLimits.map((cat, index) => (
     <LimitsListItem key={cat.id} item={cat} isOpen={Boolean(!index)} />
   ));
 
-  return <List sx={{ my: '2rem' }}>{input}</List>;
+  return <List sx={{ my: '2rem' }}>{limits}</List>;
 }

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { currencies } from './currencies';
 import parse from 'date-fns/parse';
 
@@ -63,3 +63,18 @@ export const { typeFilterChanged, dateFilterChanged, dateFilterReseted, currency
 export { setCurrencyToStorage };
 
 export default filtersSlice.reducer;
+
+export const selectFilterType = createSelector(
+  [(state) => state.filters],
+  (filters) => filters.type
+);
+
+export const selectFilterDate = createSelector(
+  [(state) => state.filters],
+  (filters) => filters.date
+);
+
+export const selectFilterCurrencyLabel = createSelector(
+  [(state) => state.filters],
+  (filters) => filters.currency.label
+);

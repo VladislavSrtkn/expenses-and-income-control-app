@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux';
 import { Button, Card } from '@mui/material';
 
-export default function CategoriesButtons({ clickHandler, pickedCat }) {
-  const type = useSelector((state) => state.filters.type);
-  const categories = useSelector((state) => state.categories.entities);
-  const visibleCategories = Object.values(categories).filter((cat) => cat.visibility);
+import { useSelector } from 'react-redux';
+import { selectFilterType } from '../filters/filtersSlice';
+import { selectAllCategories } from './categoriesSlice';
+
+export default function CategoriesButtons({ onClick, pickedCat }) {
+  const type = useSelector(selectFilterType);
+  const categories = useSelector(selectAllCategories);
+  const visibleCategories = categories.filter((cat) => cat.visibility);
 
   const categoriesButtons = visibleCategories.map((cat, i) => {
     const selected = pickedCat === cat.id ? 'selectedCategory' : null;
@@ -25,7 +28,7 @@ export default function CategoriesButtons({ clickHandler, pickedCat }) {
             fontWeight: 600,
             ':hover': { cursor: 'pointer' },
           }}
-          onClick={() => clickHandler(cat.id)}
+          onClick={() => onClick(cat.id)}
         >
           {cat.name}
         </Button>

@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { categories } from './categories';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+
 import { nanoid } from 'nanoid';
+
+import { categories } from './categories';
 
 function getCategoriesFromStorage() {
   return JSON.parse(localStorage.getItem('categories'));
@@ -53,3 +55,7 @@ export { createNewCategory };
 export const { categoriesChanged } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
+
+export const selectAllCategories = createSelector([(state) => state.categories], (categories) =>
+  Object.values(categories.entities)
+);

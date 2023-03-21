@@ -1,34 +1,24 @@
-import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import CreateIcon from '@mui/icons-material/Create';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { Button, Card, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveNewOperation, operationsChanged } from '../operations/operationsSlice';
-import CategoriesButtons from '../categories/CategoriesButtons';
+import CircularProgress from '@mui/material/CircularProgress';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers-pro';
-import CircularProgress from '@mui/material/CircularProgress';
 
-function validateAmount(amount) {
-  if (isNaN(amount) || amount <= 0) {
-    return false;
-  }
-  return true;
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
-function validateCategory(category) {
-  if (category === '') {
-    return false;
-  }
-  return true;
-}
+import { saveNewOperation, operationsChanged } from '../operations/operationsSlice';
+import { validateAmount, validateCategory } from '../validation/validation';
+import CategoriesButtons from '../categories/CategoriesButtons';
+import { selectFilterType } from '../filters/filtersSlice';
 
 export default function InputForNewOperations() {
   const dispatch = useDispatch();
-  const type = useSelector((state) => state.filters.type);
+  const type = useSelector(selectFilterType);
 
   const [loading, setLoading] = useState(false);
 
@@ -49,12 +39,9 @@ export default function InputForNewOperations() {
     return () => clearTimeout(timerId);
   }, [categoryError]);
 
-  const handlePick = (categoryId) => {
-    setCategory(categoryId);
-  };
   useEffect(() => setCategory(''), [type]);
 
-  const addNewOpeartion = () => {
+  const handleAddNewOpeartion = () => {
     if (!validateAmount(amount)) {
       setAmountError(true);
       return;
@@ -89,7 +76,7 @@ export default function InputForNewOperations() {
           justifyContent='center'
           columnSpacing={0}
         >
-          <CategoriesButtons clickHandler={handlePick} pickedCat={category} />
+          <CategoriesButtons onClick={setCategory} pickedCat={category} />
 
           <Card
             sx={{
@@ -172,7 +159,7 @@ export default function InputForNewOperations() {
               <Grid2 item xs={6} sx={{ margin: 'auto' }}>
                 <Button
                   color='secondary'
-                  onClick={addNewOpeartion}
+                  onClick={handleAddNewOpeartion}
                   variant='contained'
                   sx={{ textTransform: 'capitalize', fontWeight: 600 }}
                   endIcon={loading ? <CircularProgress size={20} sx={{ color: 'white' }} /> : null}

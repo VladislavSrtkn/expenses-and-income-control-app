@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+
+import { useSelector } from 'react-redux';
+
 import CategoriesList from '../features/categories/CategoriesList';
+import { selectAllCategories } from '../features/categories/categoriesSlice';
 
 export default function CategoriesPage() {
-  const categories = useSelector((state) => state.categories.entities);
-  const income = Object.values(categories).filter((cat) => cat.type === 'income');
-  const expense = Object.values(categories).filter((cat) => cat.type === 'expense');
+  const categories = useSelector(selectAllCategories);
+  const income = categories.filter((cat) => cat.type === 'income');
+  const expense = categories.filter((cat) => cat.type === 'expense');
 
   return (
     <Grid2 container flexDirection='column' textAlign='center'>

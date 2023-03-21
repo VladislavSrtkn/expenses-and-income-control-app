@@ -1,12 +1,15 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { typeFilterChanged } from '../filters/filtersSlice';
+
+import { selectFilterType, typeFilterChanged } from '../filters/filtersSlice';
 
 export default function TypeFilter() {
-  const type = useSelector((state) => state.filters.type);
-
   const dispatch = useDispatch();
+
+  const type = useSelector(selectFilterType);
+
   const switchTypeFilter = (e) => dispatch(typeFilterChanged(e.target.value));
 
   const style = {

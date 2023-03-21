@@ -12,24 +12,14 @@ import {
   Card,
 } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCategoryLimit } from '../features/categories/categoriesSlice';
+
+import { validateAmount, validateCategory } from '../features/validation/validation';
+import { changeCategoryLimit, selectAllCategories } from '../features/categories/categoriesSlice';
 import { categoriesChanged } from '../features/categories/categoriesSlice';
-
-function validateLimit(limit) {
-  if (limit <= 0) {
-    return false;
-  }
-  return true;
-}
-
-function validateCategory(category) {
-  if (category === '') {
-    return false;
-  }
-  return true;
-}
+import { selectFilterCurrencyLabel } from '../features/filters/filtersSlice';
 
 export default function LimitsManagement() {
   const [category, setCategory] = useState('');
@@ -41,10 +31,10 @@ export default function LimitsManagement() {
 
   const dispatch = useDispatch();
 
-  const currencyLabel = useSelector((state) => state.filters.currency.label);
+  const currencyLabel = useSelector(selectFilterCurrencyLabel);
 
-  const categories = useSelector((state) => state.categories.entities);
-  const filteredCategories = Object.values(categories).filter((cat) => cat.type === 'expense');
+  const categories = useSelector(selectAllCategories);
+  const filteredCategories = categories.filter((cat) => cat.type === 'expense');
 
   const categoryOptions = filteredCategories.map((cat) => (
     <MenuItem key={cat.id} value={cat.id}>
@@ -59,7 +49,7 @@ export default function LimitsManagement() {
       setCategoryError(true);
       return;
     }
-    if (!validateLimit(limit)) {
+    if (!validateAmount(limit)) {
       setLimitError(true);
       return;
     }
@@ -109,7 +99,7 @@ export default function LimitsManagement() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundImage: 'linear-gradient(160deg, #3a4150 90px, #1c2536 90px)',
+          backgroundImage: `linear-gradient(160deg, #3a4150 90px, #1c2536 90px)`,
         }}
       >
         <Grid2 item xs={7} sx={{ mt: 2 }}>

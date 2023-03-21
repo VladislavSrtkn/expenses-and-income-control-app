@@ -7,13 +7,13 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { dateFilterChanged, dateFilterReseted } from '../filters/filtersSlice';
+import { dateFilterChanged, dateFilterReseted, selectFilterDate } from '../filters/filtersSlice';
 import { useEffect } from 'react';
 
 export default function DateFilter() {
   const dispatch = useDispatch();
 
-  const filterDate = useSelector((state) => state.filters.date);
+  const filterDate = useSelector(selectFilterDate);
   const { year, month } = filterDate;
 
   useEffect(() => {
@@ -27,12 +27,13 @@ export default function DateFilter() {
   const displayedDate = format(parsedDate, 'MMMM y');
 
   return (
-    <ButtonGroup variant='text' sx={{ my: 3 }}>
+    <ButtonGroup variant='text' sx={{ my: 2 }}>
       <IconButton onClick={setPreviousMonth}>
         <ArrowBackIosIcon sx={{ color: '#dcdcdc' }} />
       </IconButton>
       <Paper
         sx={{
+          mx: 2,
           minWidth: 200,
           display: 'flex',
           alignItems: 'center',

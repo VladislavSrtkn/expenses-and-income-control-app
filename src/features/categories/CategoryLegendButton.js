@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 
-export default function CategoryLegendButton({ category, currencyLabel, clickHandler, className }) {
+export default function CategoryLegendButton({ category, currencyLabel, onClick, className }) {
   const { id, name, value, color } = category;
 
   return (
@@ -23,7 +23,7 @@ export default function CategoryLegendButton({ category, currencyLabel, clickHan
             bgcolor: color,
           },
         }}
-        onClick={() => clickHandler(id)}
+        onClick={() => onClick(id)}
       >
         {name} {value} {currencyLabel}
       </Button>

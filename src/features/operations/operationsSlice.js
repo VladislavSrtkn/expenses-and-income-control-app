@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
 const initialState = {
@@ -42,3 +42,7 @@ export { saveNewOperation, removeOperation };
 export const { operationsChanged } = operationsSlice.actions;
 
 export default operationsSlice.reducer;
+
+export const selectAllOperations = createSelector([(state) => state.operations], (operations) =>
+  Object.values(operations.entities)
+);

@@ -1,7 +1,9 @@
 import { Box, Divider, ListItem, ListItemText } from '@mui/material';
-import { categoriesChanged, changeCategoryVisibility } from './categoriesSlice';
-import { useDispatch } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
+
+import { useDispatch } from 'react-redux';
+
+import { categoriesChanged, changeCategoryVisibility } from './categoriesSlice';
 
 export default function CategoriesListItem({ category }) {
   const { id, name, color, visibility } = category;

@@ -1,5 +1,6 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ export default function LimitsPage() {
           value={currentPage}
           exclusive
           onChange={(e) => navigate(e.target.value)}
-          aria-label="Operation's status"
+          aria-label="Operation's type"
           sx={{ width: '100%', bgcolor: '#1c2536de', boxShadow: (theme) => theme.shadows[5] }}
         >
           <ToggleButton value='' onClick={(e) => setCurrentPage(e.target.value)} sx={style}>

@@ -3,36 +3,45 @@ import {
   Button,
   Card,
   Snackbar,
+  styled,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from '@mui/material';
-import { HexColorPicker } from 'react-colorful';
-import { useState } from 'react';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import { useDispatch, useSelector } from 'react-redux';
-import { createNewCategory, categoriesChanged } from '../features/categories/categoriesSlice';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-function checkIsNameInvalid(input, names) {
-  if (input === '' || input.length > 20) {
-    return 'Please enter a name (max 20 characters)';
-  }
-  if (names.includes(input)) {
-    return 'A category with this name already exists';
-  }
-  return false;
-}
+import { HexColorPicker } from 'react-colorful';
+
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { checkIsNameInvalid } from '../features/validation/validation';
+import {
+  createNewCategory,
+  categoriesChanged,
+  selectAllCategories,
+} from '../features/categories/categoriesSlice';
+
+const StyledToggleButton = styled(ToggleButton)(() => ({
+  width: '50%',
+  size: 'small',
+  padding: 2.4,
+  fontWeight: 600,
+  border: 0,
+  color: '#fff',
+  '&.Mui-selected': { color: '#1876d2 ' },
+}));
 
 export default function CategoriesCreation() {
   const [type, setType] = useState('expense');
   const [color, setColor] = useState('#485edd');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
-  const [snackBarOpen, setsnackBarOpen] = useState(false);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
 
-  const categories = useSelector((state) => Object.values(state.categories.entities));
+  const categories = useSelector(selectAllCategories);
   const categoriesNames = categories.map((cat) => cat.name);
 
   const dispatch = useDispatch();
@@ -47,7 +56,7 @@ export default function CategoriesCreation() {
     createNewCategory(trimmedName, color, type);
     dispatch(categoriesChanged());
     setName('');
-    setsnackBarOpen(true);
+    setSnackBarOpen(true);
   };
 
   const handleNameChange = (e) => {
@@ -59,16 +68,7 @@ export default function CategoriesCreation() {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackBarOpen(false);
-  };
-
-  const toggleBtnStyle = {
-    width: '50%',
-    p: 0.3,
-    fontWeight: 600,
-    border: 0,
-    color: '#fff !important',
-    '&.Mui-selected': { color: '#1876d2 !important' },
+    setSnackBarOpen(false);
   };
 
   const cardStyle = {
@@ -97,12 +97,8 @@ export default function CategoriesCreation() {
           }}
           onChange={(e) => setType(e.target.value)}
         >
-          <ToggleButton sx={toggleBtnStyle} value='expense'>
-            expense
-          </ToggleButton>
-          <ToggleButton sx={toggleBtnStyle} value='income'>
-            income
-          </ToggleButton>
+          <StyledToggleButton value='expense'>expense</StyledToggleButton>
+          <StyledToggleButton value='income'>income</StyledToggleButton>
         </ToggleButtonGroup>
       </Card>
 

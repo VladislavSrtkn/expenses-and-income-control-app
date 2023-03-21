@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,11 +9,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { useState } from 'react';
-import CurrencyMenu from './CurrencyMenu';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, Stack } from '@mui/material';
+
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { navLinks } from './navLinks';
+import CurrencyMenu from './CurrencyMenu';
 import SideNavItem from './SideNavItem';
 
 const drawerWidth = 240;
@@ -63,13 +65,14 @@ export default function PageHeader() {
     setOpen(false);
   };
 
-  const theme = useTheme();
-  const iconsStyle = { color: theme.palette.primary.main };
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position='fixed' open={open} sx={{ backgroundColor: '#1C2536', color: '#dcdcdc' }}>
+      <AppBar
+        position='static'
+        open={open}
+        sx={{ backgroundColor: '#1C2536', color: '#dcdcdc', mb: 3 }}
+      >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             color='inherit'
@@ -106,6 +109,7 @@ export default function PageHeader() {
         variant='temporary'
         anchor='left'
         open={open}
+        onClose={handleDrawerClose}
       >
         <DrawerHeader sx={{ justifyContent: 'space-between' }}>
           <Typography
@@ -149,7 +153,7 @@ export default function PageHeader() {
                   icon={item.icon}
                   title={item.title}
                   path={item.path}
-                  clickHandler={handleChangePage}
+                  onClick={handleChangePage}
                 />
               );
             })}
@@ -169,7 +173,6 @@ export default function PageHeader() {
           </Typography>
         </Box>
       </Drawer>
-      <div style={{ height: '5rem' }}></div>
     </Box>
   );
 }

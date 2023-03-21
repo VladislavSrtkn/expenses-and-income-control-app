@@ -1,8 +1,10 @@
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { currencies } from '../filters/currencies';
 import { currencyChanged } from '../filters/filtersSlice';
 import { setCurrencyToStorage } from '../filters/filtersSlice';

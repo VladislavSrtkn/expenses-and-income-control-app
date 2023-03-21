@@ -7,6 +7,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <PageHeader />
       <Grid2
         container
         flexDirection='column'
@@ -18,7 +19,6 @@ function App() {
         lg={3}
         pb={5}
       >
-        <PageHeader />
         <Outlet />
       </Grid2>
     </ThemeProvider>

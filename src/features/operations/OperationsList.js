@@ -1,14 +1,16 @@
 import { Card, List } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useSelector } from 'react-redux';
+import { selectFilterDate, selectFilterType } from '../filters/filtersSlice';
 import OperationsListItem from './OperationsListItem';
+import { selectAllOperations } from './operationsSlice';
 
 export default function OperationsList() {
-  const filterType = useSelector((state) => state.filters.type);
-  const filterDate = useSelector((state) => state.filters.date);
+  const filterType = useSelector(selectFilterType);
+  const filterDate = useSelector(selectFilterDate);
   const { year, month } = filterDate;
 
-  const operations = useSelector((state) => Object.values(state.operations.entities));
+  const operations = useSelector(selectAllOperations);
 
   const filteredOperations = operations
     .filter((operation) => {
@@ -20,9 +22,7 @@ export default function OperationsList() {
     })
     .sort((a, b) => (a.date >= b.date ? -1 : 1));
 
-  const input = filteredOperations.map((item) => (
-    <OperationsListItem key={item.id} itemObj={item} />
-  ));
+  const input = filteredOperations.map((item) => <OperationsListItem key={item.id} item={item} />);
 
   return (
     <Grid2 container sx={{ m: 'auto', mt: 1, width: '100%', justifyContent: 'center' }}>

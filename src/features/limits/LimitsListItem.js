@@ -1,23 +1,27 @@
 import { Card, Collapse, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { ExpandLess } from '@mui/icons-material';
 import { ExpandMore } from '@mui/icons-material';
+import { Box } from '@mui/system';
+
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Box } from '@mui/system';
+
 import { calculateExpenses } from './calculateExpenses';
 import { calculateLimitPercentage } from './calclulateLimitPercentage';
+import { selectAllOperations } from '../operations/operationsSlice';
+import { selectFilterCurrencyLabel, selectFilterDate } from '../filters/filtersSlice';
 
 export default function LimitsListItem({ item, isOpen }) {
   const [open, setOpen] = useState(isOpen);
 
   const { id, name, color, limit } = item;
 
-  const filterDate = useSelector((state) => state.filters.date);
+  const filterDate = useSelector(selectFilterDate);
   const { year, month } = filterDate;
 
-  const currencyLabel = useSelector((state) => state.filters.currency.label);
+  const currencyLabel = useSelector(selectFilterCurrencyLabel);
 
-  const operations = useSelector((state) => Object.values(state.operations.entities));
+  const operations = useSelector(selectAllOperations);
 
   const filteredOperations = operations.filter((operation) => {
     const matchedYear = operation.year === year;
@@ -38,10 +42,6 @@ export default function LimitsListItem({ item, isOpen }) {
       ? `Left: ${balance}${currencyLabel}`
       : `Overspending: ${balance * -1}${currencyLabel}`;
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
   return (
     <>
       <Card
@@ -53,7 +53,7 @@ export default function LimitsListItem({ item, isOpen }) {
           my: 2,
         }}
       >
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemText
             primary={name}
             sx={{

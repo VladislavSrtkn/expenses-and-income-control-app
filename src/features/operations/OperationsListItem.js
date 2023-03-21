@@ -1,23 +1,27 @@
 import { Box, Divider, IconButton, ListItem, ListItemText } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeOperation, operationsChanged } from './operationsSlice';
+
 import { format } from 'date-fns';
 
-export default function OperationsListItem({ itemObj }) {
-  const { id, text, amount, type, category, year, month, date } = itemObj;
+import { useDispatch, useSelector } from 'react-redux';
+
+import { removeOperation, operationsChanged } from './operationsSlice';
+import { selectAllCategories } from '../categories/categoriesSlice';
+import { selectFilterCurrencyLabel } from '../filters/filtersSlice';
+
+export default function OperationsListItem({ item }) {
+  const { id, text, amount, type, category, year, month, date } = item;
 
   const dispatch = useDispatch();
-  const currencyLabel = useSelector((state) => state.filters.currency.label);
-  const categories = useSelector((state) => state.categories.entities);
+  const currencyLabel = useSelector(selectFilterCurrencyLabel);
+  const categories = useSelector(selectAllCategories);
 
-  const catName = categories[category].name;
-  const color = categories[category].color;
+  const { name, color } = categories.find((cat) => cat.id === category);
 
   const displayedAmount = type === 'income' ? `+${amount}` : `-${amount}`;
 
-  const handleDelete = () => {
+  const handleRemoveOperation = () => {
     removeOperation(id);
     dispatch(operationsChanged());
   };
@@ -55,7 +59,7 @@ export default function OperationsListItem({ itemObj }) {
           <Grid2 item xs={6}>
             <ListItemText
               primary={text}
-              secondary={catName}
+              secondary={name}
               sx={{
                 overflow: 'overlay',
                 fontSize: '0.7rem',
@@ -81,7 +85,7 @@ export default function OperationsListItem({ itemObj }) {
             ></Box>
           </Grid2>
           <Grid2 item xs={1}>
-            <IconButton size='small' sx={{ color: '#dcdcdc' }} onClick={handleDelete}>
+            <IconButton size='small' sx={{ color: '#dcdcdc' }} onClick={handleRemoveOperation}>
               <DeleteIcon />
             </IconButton>
           </Grid2>

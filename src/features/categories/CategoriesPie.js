@@ -1,10 +1,15 @@
-import { useSelector } from 'react-redux';
-import { PieChart, Pie, Cell } from 'recharts';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import CategoryLegendButton from './CategoryLegendButton';
-import { useState } from 'react';
-import OperationShortItem from '../operations/OperationShortItem';
 import { Card, List, Typography } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+
+import { PieChart, Pie, Cell } from 'recharts';
+
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+
+import CategoryLegendButton from './CategoryLegendButton';
+import OperationShortItem from '../operations/OperationShortItem';
+import { selectAllOperations } from '../operations/operationsSlice';
+import { selectFilterCurrencyLabel, selectFilterDate } from '../filters/filtersSlice';
 
 function addSumForCategories(year, month, type, operations, categories) {
   const categoriesCopy = { ...categories };
@@ -20,8 +25,7 @@ function addSumForCategories(year, month, type, operations, categories) {
       };
     }
   });
-
-  return categoriesCopy;
+  return Object.values(categoriesCopy);
 }
 
 export default function CategoriesPie({ operationsType }) {
@@ -36,11 +40,11 @@ export default function CategoriesPie({ operationsType }) {
     setPickedCat(catId);
   };
 
-  const filterDate = useSelector((state) => state.filters.date);
+  const filterDate = useSelector(selectFilterDate);
   const { year, month } = filterDate;
-  const operations = useSelector((state) => Object.values(state.operations.entities));
+  const operations = useSelector(selectAllOperations);
   const categories = useSelector((state) => state.categories.entities);
-  const currencyLabel = useSelector((state) => state.filters.currency.label);
+  const currencyLabel = useSelector(selectFilterCurrencyLabel);
 
   const noOperationsText =
     operationsType === 'expense'
@@ -55,9 +59,7 @@ export default function CategoriesPie({ operationsType }) {
     categories
   );
 
-  const data = Object.values(categoriesWithAmount)
-    .filter((cat) => cat.value)
-    .sort((a, b) => b.value - a.value);
+  const data = categoriesWithAmount.filter((cat) => cat.value).sort((a, b) => b.value - a.value);
 
   const cells = data.map((cat) => (
     <Cell
@@ -75,7 +77,7 @@ export default function CategoriesPie({ operationsType }) {
       key={cat.id}
       category={cat}
       currencyLabel={currencyLabel}
-      clickHandler={handleSwitchPickedCat}
+      onClick={handleSwitchPickedCat}
     />
   ));
 
