@@ -16,7 +16,7 @@ export default function LimitsPage() {
   };
 
   return (
-    <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center', mt: 2 }}>
       <ToggleButtonGroup
         color='primary'
         size='small'

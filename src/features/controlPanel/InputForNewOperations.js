@@ -84,7 +84,7 @@ export default function InputForNewOperations() {
                 <TextField
                   variant='standard'
                   size='small'
-                  type='number'
+                  type='tel'
                   label='Amount'
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}

@@ -125,7 +125,7 @@ export default function LimitsManagement() {
             <InputLabel htmlFor='limit'>Limit</InputLabel>
             <OutlinedInput
               id='limit'
-              type='number'
+              type='tel'
               label='Limit'
               value={limit}
               error={limitError}

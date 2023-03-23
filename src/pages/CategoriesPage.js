@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import CategoriesList from '../features/categories/CategoriesList';
@@ -9,9 +10,9 @@ export default function CategoriesPage() {
   const expense = categories.filter((cat) => cat.type === 'expense');
 
   return (
-    <>
+    <Box sx={{ mt: 3 }}>
       <CategoriesList title='Income' categories={income} />
       <CategoriesList title='Expenses' categories={expense} />
-    </>
+    </Box>
   );
 }
