@@ -41,8 +41,8 @@ export default function MonthlySummary() {
   });
 
   return (
-    <Card sx={{ p: 1, mb: 1, bgcolor: '#1c2536', color: '#dcdcdc' }}>
-      <Typography sx={{ fontWeight: 600 }}>
+    <Card sx={{ p: 1, mb: 1, bgcolor: 'customBg.dark', color: 'text.primary', width: '100%' }}>
+      <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
         {header} {monthlyTotal} {currencyLabel}
       </Typography>
     </Card>

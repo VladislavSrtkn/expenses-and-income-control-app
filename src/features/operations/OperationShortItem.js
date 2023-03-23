@@ -1,5 +1,4 @@
 import { Divider, ListItem, ListItemText } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 import { format } from 'date-fns';
 
@@ -10,51 +9,30 @@ export default function OperationShortItem({ operation, currency }) {
 
   return (
     <>
-      <ListItem
-        sx={{
-          columnGap: 1,
-          alignItems: 'flex-start',
-          '& .MuiTypography-root': {
-            color: '#dfdfdf',
-          },
-        }}
-      >
-        <Grid2
-          container
-          columnSpacing={1}
-          alignItems='center'
-          justifyContent='space-between'
-          sx={{ width: '100%' }}
-        >
-          <Grid2>
-            <ListItemText
-              sx={{
-                minWidth: 'fit-content',
-                color: '#dcdcdc',
-                '& .MuiListItemText-primary': {
-                  fontWeight: 600,
-                  fontSize: 15,
-                },
-                '& .MuiListItemText-secondary': {
-                  fontSize: 12,
-                },
-              }}
-              secondary={formattedDate}
-              primary={`${displayedAmount}${currency}`}
-            ></ListItemText>
-          </Grid2>
-          <Grid2>
-            <ListItemText
-              sx={{
-                overflow: 'overlay',
-                '& .MuiListItemText-primary': {
-                  fontSize: 14,
-                },
-              }}
-              primary={text}
-            ></ListItemText>
-          </Grid2>
-        </Grid2>
+      <ListItem>
+        <ListItemText
+          sx={{
+            '& .MuiListItemText-primary': {
+              fontWeight: 600,
+              fontSize: 15,
+            },
+            '& .MuiListItemText-secondary': {
+              fontSize: 12,
+            },
+          }}
+          secondary={formattedDate}
+          primary={`${displayedAmount}${currency}`}
+        ></ListItemText>
+
+        <ListItemText
+          sx={{
+            overflow: 'overlay',
+            '& .MuiListItemText-primary': {
+              fontSize: 14,
+            },
+          }}
+          primary={text}
+        ></ListItemText>
       </ListItem>
       <Divider />
     </>

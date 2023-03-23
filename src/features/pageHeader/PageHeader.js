@@ -68,11 +68,7 @@ export default function PageHeader() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position='static'
-        open={open}
-        sx={{ backgroundColor: '#1C2536', color: '#dcdcdc', mb: 3 }}
-      >
+      <AppBar position='static' open={open} sx={{ bgcolor: 'customBg.dark', mb: 3 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             color='inherit'
@@ -102,8 +98,7 @@ export default function PageHeader() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: '#1C2536',
-            color: '#9DA4AE',
+            bgcolor: 'customBg.dark',
           },
         }}
         variant='temporary'
@@ -115,7 +110,6 @@ export default function PageHeader() {
           <Typography
             sx={{
               fontWeight: 600,
-              color: '#dcdcdc',
             }}
           >
             Navigation
@@ -162,7 +156,7 @@ export default function PageHeader() {
           <Typography sx={{ fontSize: 14, p: 1 }}>
             Made by{' '}
             <Link
-              color='#1976d2'
+              sx={{ color: 'primary.main ' }}
               target='_blank'
               href='https://github.com/VladislavSrtkn'
               underline='hover'

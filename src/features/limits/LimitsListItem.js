@@ -11,8 +11,8 @@ import { calculateLimitPercentage } from './calclulateLimitPercentage';
 import { selectAllOperations } from '../operations/operationsSlice';
 import { selectFilterCurrencyLabel, selectFilterDate } from '../filters/filtersSlice';
 
-export default function LimitsListItem({ item, isOpen }) {
-  const [open, setOpen] = useState(isOpen);
+export default function LimitsListItem({ item }) {
+  const [open, setOpen] = useState(true);
 
   const { id, name, color, limit } = item;
 
@@ -46,10 +46,9 @@ export default function LimitsListItem({ item, isOpen }) {
     <>
       <Card
         sx={{
-          color: '#dcdcdc',
-          bgcolor: '#1c2536',
           width: '100%',
-          backgroundImage: 'linear-gradient(160deg, #3a4150 90px, #1c2536 90px)',
+          backgroundImage: (theme) =>
+            `linear-gradient(160deg, ${theme.palette.customBg.light} 90px, ${theme.palette.customBg.dark} 90px)`,
           my: 2,
         }}
       >
@@ -82,7 +81,10 @@ export default function LimitsListItem({ item, isOpen }) {
             {currencyLabel}
           </Typography>
 
-          <Typography textAlign='start' sx={{ my: 1, fontSize: 15, fontWeight: 600 }}>
+          <Typography
+            textAlign='start'
+            sx={{ my: 1, fontSize: 15, fontWeight: 600, color: 'primary.main' }}
+          >
             {displayedBalance}
           </Typography>
           <Box

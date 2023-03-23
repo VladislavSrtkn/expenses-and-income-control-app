@@ -1,26 +1,19 @@
-import PageHeader from './features/pageHeader/PageHeader';
+import { Grid, ThemeProvider } from '@mui/material';
+
 import { Outlet } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
+
+import PageHeader from './features/pageHeader/PageHeader';
 import theme from './customTheme';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <PageHeader />
-      <Grid2
-        container
-        flexDirection='column'
-        sx={{ m: 'auto' }}
-        px={2}
-        xs={12}
-        sm={6}
-        md={4}
-        lg={3}
-        pb={5}
-      >
-        <Outlet />
-      </Grid2>
+      <Grid container sx={{ justifyContent: 'center', px: 2, pb: 3 }}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Outlet />
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }

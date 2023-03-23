@@ -11,13 +11,13 @@ import {
   Alert,
   Card,
 } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { Box } from '@mui/system';
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { validateAmount, validateCategory } from '../features/validation/validation';
-import { changeCategoryLimit, selectAllCategories } from '../features/categories/categoriesSlice';
+import { changeCategoryLimit } from '../features/categories/categoriesSlice';
 import { categoriesChanged } from '../features/categories/categoriesSlice';
 import { selectFilterCurrencyLabel } from '../features/filters/filtersSlice';
 
@@ -26,15 +26,15 @@ export default function LimitsManagement() {
   const [categoryError, setCategoryError] = useState(false);
   const [limit, setLimit] = useState('');
   const [limitError, setLimitError] = useState(false);
-  const [snackBarOpen, setsnackBarOpen] = useState(false);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [message, setMessage] = useState('');
 
   const dispatch = useDispatch();
 
   const currencyLabel = useSelector(selectFilterCurrencyLabel);
 
-  const categories = useSelector(selectAllCategories);
-  const filteredCategories = categories.filter((cat) => cat.type === 'expense');
+  const categories = useSelector((state) => state.categories.entities);
+  const filteredCategories = Object.values(categories).filter((cat) => cat.type === 'expense');
 
   const categoryOptions = filteredCategories.map((cat) => (
     <MenuItem key={cat.id} value={cat.id}>
@@ -59,7 +59,7 @@ export default function LimitsManagement() {
     setCategory('');
     setLimit('');
     setMessage('The limit has been successfully set!');
-    setsnackBarOpen(true);
+    setSnackBarOpen(true);
   };
 
   const handleChangeCategory = (e) => {
@@ -80,97 +80,78 @@ export default function LimitsManagement() {
     setCategory('');
     setLimit('');
     setMessage('The limit has been successfully removed!');
-    setsnackBarOpen(true);
+    setSnackBarOpen(true);
   };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackBarOpen(false);
+    setSnackBarOpen(false);
   };
 
   return (
-    <Grid2 container flexDirection='column' rowSpacing={3} columnSpacing={1} alignItems='center'>
+    <>
       <Card
         sx={{
-          width: '100%',
+          p: 3,
           my: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          backgroundImage: `linear-gradient(160deg, #3a4150 90px, #1c2536 90px)`,
+          backgroundImage: (theme) =>
+            `linear-gradient(166deg, ${theme.palette.customBg.light} 90px, ${theme.palette.customBg.dark} 90px)`,
         }}
       >
-        <Grid2 item xs={7} sx={{ mt: 2 }}>
-          <FormControl fullWidth error={categoryError}>
-            <InputLabel sx={{ color: '#dcdcdc' }} htmlFor='category-select'>
-              Category
-            </InputLabel>
+        <Box
+          sx={{
+            display: 'flex',
+            rowGap: 2,
+            flexDirection: 'column',
+            textAlign: 'center',
+          }}
+        >
+          <FormControl error={categoryError}>
+            <InputLabel htmlFor='category-select'>Category</InputLabel>
             <Select
               id='category-select'
               value={category}
               label='Category'
-              sx={{
-                '& .MuiOutlinedInput-input': { color: '#fff' },
-                '& fieldset': {
-                  borderColor: '#dcdcdc',
-                },
-                '& svg': {
-                  color: '#dcdcdc',
-                },
-              }}
               onChange={handleChangeCategory}
             >
               {categoryOptions}
             </Select>
             <FormHelperText>{categoryError ? 'Select category' : ' '}</FormHelperText>
           </FormControl>
-        </Grid2>
 
-        <Grid2 item xs={7}>
-          <FormControl fullWidth error={limitError}>
-            <InputLabel sx={{ color: '#dcdcdc' }} htmlFor='limit'>
-              Limit
-            </InputLabel>
+          <FormControl error={limitError}>
+            <InputLabel htmlFor='limit'>Limit</InputLabel>
             <OutlinedInput
               id='limit'
               type='number'
               label='Limit'
               value={limit}
               error={limitError}
-              sx={{
-                '& .MuiOutlinedInput-input': { color: '#fff' },
-                '& fieldset': {
-                  borderColor: '#dcdcdc',
-                },
-              }}
-              startAdornment={
-                <InputAdornment
-                  sx={{ '& .MuiTypography-root': { color: '#1976d2' } }}
-                  position='start'
-                >
-                  {currencyLabel}
-                </InputAdornment>
-              }
+              startAdornment={<InputAdornment position='start'>{currencyLabel}</InputAdornment>}
               onChange={handleChangeLimit}
             />
             <FormHelperText>{limitError ? 'Invalid amount' : ' '}</FormHelperText>
           </FormControl>
-        </Grid2>
+        </Box>
 
-        <Grid2 item xs={5}>
-          <Button variant='contained' color='secondary' size='large' onClick={handleSetLimit}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+          }}
+        >
+          <Button variant='contained' size='large' onClick={handleSetLimit}>
             Set limit
           </Button>
-        </Grid2>
-        {showRemoveButton && (
-          <Grid2 item xs={5}>
-            <Button variant='contained' size='large' onClick={handleRemoveLimit} color='secondary'>
+
+          {showRemoveButton && (
+            <Button variant='contained' size='large' onClick={handleRemoveLimit}>
               Remove
             </Button>
-          </Grid2>
-        )}
+          )}
+        </Box>
       </Card>
 
       <Snackbar open={snackBarOpen} autoHideDuration={4000} onClose={handleClose}>
@@ -178,6 +159,6 @@ export default function LimitsManagement() {
           {message}
         </Alert>
       </Snackbar>
-    </Grid2>
+    </>
   );
 }

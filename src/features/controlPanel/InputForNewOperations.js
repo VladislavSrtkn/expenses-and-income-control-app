@@ -2,8 +2,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import CreateIcon from '@mui/icons-material/Create';
 import PaymentsIcon from '@mui/icons-material/Payments';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { Button, Card, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers-pro';
@@ -69,52 +68,40 @@ export default function InputForNewOperations() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       {type !== 'all' && (
-        <Grid2
-          container
-          direction='column'
-          alignItems='center'
-          justifyContent='center'
-          columnSpacing={0}
-        >
+        <Box sx={{ width: '100%' }}>
           <CategoriesButtons onClick={setCategory} pickedCat={category} />
 
           <Card
             sx={{
-              px: 1,
-              mt: 1,
-              backgroundImage: 'linear-gradient(330deg, #1c2536 50%, #3a4150 50%)',
+              p: 2,
+              mt: 3,
+              backgroundImage: (theme) =>
+                `linear-gradient(330deg, ${theme.palette.customBg.dark} 50%, ${theme.palette.customBg.light} 50%)`,
             }}
           >
-            <Grid2 item display='flex' flexWrap='wrap'>
-              <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
+            <Box sx={{ display: 'flex', rowGap: 2, flexDirection: 'column', textAlign: 'center' }}>
+              <Box sx={{ display: 'flex', gap: 2 }}>
                 <TextField
                   variant='standard'
                   size='small'
+                  type='number'
                   label='Amount'
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   error={amountError}
                   helperText={amountError ? 'Invalid amount' : ' '}
                   sx={{
-                    paddingRight: '1rem',
-                    input: {
-                      color: '#fff',
-                    },
-                    label: {
-                      color: '#dcdcdc',
-                    },
+                    width: '50%',
                   }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position='start'>
-                        <PaymentsIcon sx={{ color: amountError ? 'red' : '#1876d2' }} />
+                        <PaymentsIcon sx={{ color: amountError ? 'error.main' : 'primary.main' }} />
                       </InputAdornment>
                     ),
                   }}
                 />
-              </Grid2>
 
-              <Grid2 item xs={6} sx={{ textAlign: 'left' }}>
                 <MobileDatePicker
                   label='Date'
                   value={operationDate}
@@ -122,62 +109,58 @@ export default function InputForNewOperations() {
                     setOperationDate(newDate);
                   }}
                   renderInput={(params) => (
-                    <TextField
-                      size='small'
-                      variant='standard'
-                      sx={{ label: { color: '#dcdcdc' }, input: { color: '#fff' } }}
-                      {...params}
-                    />
+                    <TextField size='small' variant='standard' sx={{ width: '50%' }} {...params} />
                   )}
                 />
-              </Grid2>
+              </Box>
 
-              <Grid2 item xs={12} sx={{ textAlign: 'left' }}>
+              <Box>
                 <TextField
                   fullWidth
                   size='small'
                   variant='standard'
                   label='Comment'
                   value={text}
-                  sx={{
-                    input: { color: '#fff' },
-                    label: {
-                      color: '#dcdcdc',
-                    },
-                  }}
                   onChange={(e) => setText(e.target.value)}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position='start'>
-                        <CreateIcon sx={{ color: '#1876d2' }} />
+                        <CreateIcon sx={{ color: 'primary.main' }} />
                       </InputAdornment>
                     ),
                   }}
                 />
-              </Grid2>
+              </Box>
 
-              <Grid2 item xs={6} sx={{ margin: 'auto' }}>
+              <Box>
                 <Button
-                  color='secondary'
                   onClick={handleAddNewOpeartion}
                   variant='contained'
-                  sx={{ textTransform: 'capitalize', fontWeight: 600 }}
-                  endIcon={loading ? <CircularProgress size={20} sx={{ color: 'white' }} /> : null}
+                  size='medium'
+                  sx={{
+                    flex: 0,
+                    textTransform: 'capitalize',
+                    fontWeight: 600,
+                    textAlign: 'center',
+                  }}
+                  endIcon={
+                    loading ? <CircularProgress size={20} sx={{ color: 'text.primary' }} /> : null
+                  }
                 >
                   Add
                 </Button>
-              </Grid2>
-            </Grid2>
+              </Box>
+            </Box>
 
-            <Grid2 item xs={12} sx={{ minHeight: '2.5rem' }}>
+            <Box sx={{ textAlign: 'center', minHeight: '1.5rem' }}>
               {categoryError && (
-                <Typography component='span' sx={{ color: 'red', fontSize: 12 }}>
+                <Typography component='span' sx={{ color: 'error.main', fontSize: 12 }}>
                   Please choose category
                 </Typography>
               )}
-            </Grid2>
+            </Box>
           </Card>
-        </Grid2>
+        </Box>
       )}
     </LocalizationProvider>
   );

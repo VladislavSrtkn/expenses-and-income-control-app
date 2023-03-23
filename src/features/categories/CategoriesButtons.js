@@ -18,7 +18,7 @@ export default function CategoriesButtons({ onClick, pickedCat }) {
           className={selected}
           component='span'
           sx={{
-            color: '#fff',
+            color: 'white',
             borderRadius: '0.9rem',
             px: 2,
             py: 0.1,
@@ -46,7 +46,8 @@ export default function CategoriesButtons({ onClick, pickedCat }) {
         px: 1,
         py: 2,
         my: 1,
-        backgroundImage: 'linear-gradient(45deg, #1c2536 50%, #3a4150 50%)',
+        backgroundImage: (theme) =>
+          `linear-gradient(45deg, ${theme.palette.customBg.dark} 50%, ${theme.palette.customBg.light} 50%)`,
       }}
     >
       {categoriesButtons}

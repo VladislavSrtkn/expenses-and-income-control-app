@@ -1,5 +1,4 @@
-import { Card, List, Typography } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { Box, Card, List, Typography } from '@mui/material';
 
 import { PieChart, Pie, Cell } from 'recharts';
 
@@ -11,7 +10,7 @@ import OperationShortItem from '../operations/OperationShortItem';
 import { selectAllOperations } from '../operations/operationsSlice';
 import { selectFilterCurrencyLabel, selectFilterDate } from '../filters/filtersSlice';
 
-function addSumForCategories(year, month, type, operations, categories) {
+function addAmountForCategories(year, month, type, operations, categories) {
   const categoriesCopy = { ...categories };
 
   operations.forEach((operation) => {
@@ -51,7 +50,7 @@ export default function CategoriesPie({ operationsType }) {
       ? 'No expenses data for this month'
       : 'No income data for this month';
 
-  const categoriesWithAmount = addSumForCategories(
+  const categoriesWithAmount = addAmountForCategories(
     year,
     month,
     operationsType,
@@ -96,7 +95,7 @@ export default function CategoriesPie({ operationsType }) {
   ));
 
   if (!data.length) {
-    return <Typography sx={{ color: '#dcdcdc', fontSize: 14 }}>{noOperationsText}</Typography>;
+    return <Typography sx={{ fontSize: 14 }}>{noOperationsText}</Typography>;
   }
 
   return (
@@ -106,7 +105,8 @@ export default function CategoriesPie({ operationsType }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundImage: 'linear-gradient(158deg, #3a4150 200px, #1c2536 200px)',
+        backgroundImage: (theme) =>
+          `linear-gradient(158deg, ${theme.palette.customBg.light} 200px, ${theme.palette.customBg.dark} 200px)`,
       }}
     >
       <PieChart width={280} height={200}>
@@ -123,12 +123,8 @@ export default function CategoriesPie({ operationsType }) {
           {cells}
         </Pie>
       </PieChart>
-      <Grid2 sx={{ width: '100%', display: 'flex', gap: 1, flexWrap: 'wrap', marginY: '1.5rem' }}>
-        {legend}
-      </Grid2>
-      <Grid2 item sx={{ width: '100%' }}>
-        <List>{listInput}</List>
-      </Grid2>
+      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', marginY: '1.5rem' }}>{legend}</Box>
+      <List sx={{ width: '100%' }}>{listInput}</List>
     </Card>
   );
 }

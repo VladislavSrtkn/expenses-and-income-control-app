@@ -1,33 +1,24 @@
-import { Typography } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { Box, Typography } from '@mui/material';
 
 import CategoriesPie from '../features/categories/CategoriesPie';
 import DateFilter from '../features/controlPanel/DateFilter';
 
 export default function MonthlyStatisticsPage() {
-  const style = { py: 3, fontWeight: 'bold', color: '#dcdcdc' };
+  const style = { py: 3, fontWeight: 'bold', color: 'primary.main' };
 
   return (
-    <Grid2
-      container
-      direction='column'
-      px={2}
-      textAlign='center'
-      margin='auto'
-      alignContent='center'
-    >
-      <Grid2 item>
-        <DateFilter />
-      </Grid2>
+    <Box sx={{ textAlign: 'center' }}>
+      <DateFilter />
+
       <Typography component={'h3'} sx={style}>
-        Expenses:
+        Expenses
       </Typography>
       <CategoriesPie operationsType='expense' />
 
       <Typography component={'h3'} sx={style}>
-        Income:
+        Income
       </Typography>
       <CategoriesPie operationsType='income' />
-    </Grid2>
+    </Box>
   );
 }

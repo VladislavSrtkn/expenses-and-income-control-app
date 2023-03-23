@@ -29,27 +29,27 @@ export default function DateFilter() {
   return (
     <ButtonGroup variant='text' sx={{ my: 2 }}>
       <IconButton onClick={setPreviousMonth}>
-        <ArrowBackIosIcon sx={{ color: '#dcdcdc' }} />
+        <ArrowBackIosIcon sx={{ color: 'text.primary' }} />
       </IconButton>
       <Paper
         sx={{
           mx: 2,
-          minWidth: 200,
+          minWidth: 150,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontWeight: 600,
-          bgcolor: '#1c2536',
-          backgroundImage: 'linear-gradient(to right, #3b4150 0%, #1c2536 51%, #3a404f 100%)',
+          backgroundImage: (theme) =>
+            `linear-gradient(to right, ${theme.palette.customBg.light} 0%, ${theme.palette.customBg.dark} 51%)`,
           backgroundSize: '200% auto',
-          color: '#dcdcdc',
+          color: 'text.primary',
           borderRadius: '4px',
         }}
       >
         {displayedDate}
       </Paper>
       <IconButton onClick={setNextMonth}>
-        <ArrowForwardIosIcon sx={{ color: '#dcdcdc' }} />
+        <ArrowForwardIosIcon sx={{ color: 'text.primary' }} />
       </IconButton>
     </ButtonGroup>
   );

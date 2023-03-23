@@ -9,12 +9,15 @@ export default function CategoriesList({ title, categories }) {
   return (
     <Card
       sx={{
-        my: 1,
-        backgroundImage: 'linear-gradient(330deg, #1c2536 50%, #3a4150 50%)',
-        color: '#dcdcdc',
+        mb: 3,
+        backgroundImage: (theme) =>
+          `linear-gradient(330deg, ${theme.palette.customBg.dark} 50%, ${theme.palette.customBg.light} 50%)`,
       }}
     >
-      <Typography component={'h3'} sx={{ fontWeight: 600, pt: 1 }}>
+      <Typography
+        component={'h3'}
+        sx={{ fontWeight: 600, pt: 1, textAlign: 'center', color: 'primary.main' }}
+      >
         {title}
       </Typography>
       <List>{input}</List>

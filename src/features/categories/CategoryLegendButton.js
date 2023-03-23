@@ -10,6 +10,7 @@ export default function CategoryLegendButton({ category, currencyLabel, onClick,
         className={className}
         sx={{
           bgcolor: color,
+          color: 'white',
           borderRadius: '0.9rem',
           px: 2,
           py: 0.3,
@@ -17,7 +18,6 @@ export default function CategoryLegendButton({ category, currencyLabel, onClick,
           height: 'max-content',
           fontSize: 11,
           fontWeight: 600,
-          color: '#fff',
           cursor: 'pointer',
           ':hover': {
             bgcolor: color,

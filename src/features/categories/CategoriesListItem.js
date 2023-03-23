@@ -17,16 +17,7 @@ export default function CategoriesListItem({ category }) {
   return (
     <>
       <ListItem sx={{ alignItems: 'center' }}>
-        <Checkbox
-          color='default'
-          sx={{
-            color: '#fff',
-            '&.Mui-checked': { color: '#dcdcdc' },
-          }}
-          size='small'
-          checked={visibility}
-          onChange={() => handleChangeVisibility(id)}
-        />
+        <Checkbox size='small' checked={visibility} onChange={() => handleChangeVisibility(id)} />
 
         <ListItemText
           primaryTypographyProps={{ fontSize: '0.8rem', fontWeight: 600 }}

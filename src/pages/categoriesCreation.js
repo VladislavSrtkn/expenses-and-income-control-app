@@ -1,16 +1,15 @@
 import {
   Alert,
+  Box,
   Button,
   Card,
   Snackbar,
-  styled,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from '@mui/material';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 import { HexColorPicker } from 'react-colorful';
 
@@ -23,16 +22,6 @@ import {
   categoriesChanged,
   selectAllCategories,
 } from '../features/categories/categoriesSlice';
-
-const StyledToggleButton = styled(ToggleButton)(() => ({
-  width: '50%',
-  size: 'small',
-  padding: 2.4,
-  fontWeight: 600,
-  border: 0,
-  color: '#fff',
-  '&.Mui-selected': { color: '#1876d2 ' },
-}));
 
 export default function CategoriesCreation() {
   const [type, setType] = useState('expense');
@@ -72,46 +61,59 @@ export default function CategoriesCreation() {
   };
 
   const cardStyle = {
-    my: 2,
+    my: 3,
     py: 3,
     px: 1,
-    color: '#dcdcdc',
-    bgcolor: '#1c2536',
-    width: '100%',
-    backgroundImage: 'linear-gradient(168deg, #1c2536 65%, #3a4150 50%)',
+    backgroundImage: (theme) =>
+      `linear-gradient(168deg, ${theme.palette.customBg.dark} 65%, ${theme.palette.customBg.light} 50%)`,
+  };
+
+  const toggleBtnStyle = {
+    p: 0.3,
+    fontWeight: 600,
+    border: 0,
+    color: 'text.primary',
+    '&.Mui-selected': { color: 'primary.main' },
   };
 
   return (
-    <Grid2 container alignContent='center' textAlign='center' direction='column' rowSpacing={2}>
+    <Box sx={{ textAlign: 'center' }}>
       <Card sx={cardStyle}>
-        <Typography sx={{ fontWeight: 600 }}>Choose a type:</Typography>
+        <Typography sx={{ fontWeight: 600 }}>Choose a type</Typography>
         <ToggleButtonGroup
-          color='primary'
+          fullWidth
           size='small'
           value={type}
           sx={{
-            bgcolor: '#1c2536de',
-            width: '100%',
+            bgcolor: 'customBg.dark',
             mt: 1,
             boxShadow: (theme) => theme.shadows[5],
           }}
           onChange={(e) => setType(e.target.value)}
         >
-          <StyledToggleButton value='expense'>expense</StyledToggleButton>
-          <StyledToggleButton value='income'>income</StyledToggleButton>
+          <ToggleButton sx={toggleBtnStyle} value='expense'>
+            expense
+          </ToggleButton>
+          <ToggleButton sx={toggleBtnStyle} value='income'>
+            income
+          </ToggleButton>
         </ToggleButtonGroup>
       </Card>
 
       <Card
-        sx={{ ...cardStyle, backgroundImage: 'linear-gradient(168deg, #3a4150 65%, #1c2536 50%)' }}
+        sx={{
+          ...cardStyle,
+          backgroundImage: (theme) =>
+            `linear-gradient(168deg, ${theme.palette.customBg.light} 65%, ${theme.palette.customBg.dark} 50%)`,
+        }}
       >
-        <Typography sx={{ fontWeight: 600 }}>Enter name :</Typography>
+        <Typography sx={{ fontWeight: 600 }}>Enter the name</Typography>
         <TextField
           variant='standard'
           size='small'
           value={name}
           label='Name'
-          sx={{ label: { color: '#dcdcdc', fontSize: 14 }, input: { color: '#fff' } }}
+          sx={{ label: { fontSize: 14 } }}
           fullWidth
           error={Boolean(nameError)}
           helperText={nameError ? nameError.toString() : ' '}
@@ -120,7 +122,7 @@ export default function CategoriesCreation() {
       </Card>
 
       <Card sx={{ ...cardStyle, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography sx={{ fontWeight: 600 }}>Pick a color:</Typography>
+        <Typography sx={{ fontWeight: 600 }}>Pick a color</Typography>
         <HexColorPicker
           style={{
             width: '80%',
@@ -135,7 +137,6 @@ export default function CategoriesCreation() {
 
       <Button
         variant='contained'
-        color='secondary'
         sx={{ marginY: '2rem', maxWidth: '8rem', alignSelf: 'center' }}
         endIcon={<PlaylistAddCheckIcon />}
         onClick={handleSubmit}
@@ -148,6 +149,6 @@ export default function CategoriesCreation() {
           Category has been successfully created!
         </Alert>
       </Snackbar>
-    </Grid2>
+    </Box>
   );
 }

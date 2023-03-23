@@ -1,5 +1,4 @@
 import { Box, Divider, IconButton, ListItem, ListItemText } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { format } from 'date-fns';
@@ -29,67 +28,49 @@ export default function OperationsListItem({ item }) {
   const formattedDate = format(new Date(year, month, date), 'do MMM');
   return (
     <>
-      <ListItem
-        sx={{
-          '& .MuiTypography-root': {
-            color: '#dfdfdf',
-          },
-        }}
-      >
-        <Grid2
-          container
-          columnSpacing={1}
-          alignItems='center'
-          justifyContent='space-between'
-          xs={12}
-        >
-          <Grid2 item xs={4}>
-            <ListItemText
-              primary={`${displayedAmount}${currencyLabel}`}
-              sx={{
-                overflow: 'overlay',
-                '& .MuiListItemText-primary': {
-                  fontWeight: 600,
-                },
-              }}
-              secondary={formattedDate}
-            />
-          </Grid2>
+      <ListItem>
+        <ListItemText
+          primary={`${displayedAmount}${currencyLabel}`}
+          sx={{
+            overflow: 'overlay',
+            '& .MuiListItemText-primary': {
+              fontWeight: 600,
+            },
+          }}
+          secondary={formattedDate}
+        />
 
-          <Grid2 item xs={6}>
-            <ListItemText
-              primary={text}
-              secondary={name}
-              sx={{
-                overflow: 'overlay',
-                fontSize: '0.7rem',
-                '& .MuiListItemText-primary': {
-                  fontSize: 12,
-                },
-                '& .MuiListItemText-secondary': {
-                  fontWeight: 600,
-                  fontSize: 13,
-                },
-              }}
-            />
-          </Grid2>
-          <Grid2 item xs={1}>
-            <Box
-              component='div'
-              sx={{
-                width: '1rem',
-                height: '0.5rem',
-                borderRadius: '1rem',
-                bgcolor: color,
-              }}
-            ></Box>
-          </Grid2>
-          <Grid2 item xs={1}>
-            <IconButton size='small' sx={{ color: '#dcdcdc' }} onClick={handleRemoveOperation}>
-              <DeleteIcon />
-            </IconButton>
-          </Grid2>
-        </Grid2>
+        <ListItemText
+          primary={name}
+          secondary={text}
+          sx={{
+            width: '40%',
+            overflow: 'overlay',
+            fontSize: '0.7rem',
+            '& .MuiListItemText-primary': {
+              fontWeight: 600,
+              fontSize: 13,
+            },
+            '& .MuiListItemText-secondary': {
+              fontSize: 12,
+            },
+          }}
+        />
+
+        <Box
+          component='div'
+          sx={{
+            width: '1rem',
+            height: '0.5rem',
+            borderRadius: '1rem',
+            mx: 1,
+            bgcolor: color,
+          }}
+        ></Box>
+
+        <IconButton size='small' color='primary' onClick={handleRemoveOperation}>
+          <DeleteIcon />
+        </IconButton>
       </ListItem>
       <Divider />
     </>

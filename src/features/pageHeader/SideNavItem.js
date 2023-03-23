@@ -19,10 +19,10 @@ export default function SideNavItem(props) {
           textAlign: 'left',
           width: '100%',
           ...(active && {
-            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+            bgcolor: 'rgba(255, 255, 255, 0.04)',
           }),
           '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+            bgcolor: 'rgba(255, 255, 255, 0.04)',
           },
         }}
       >

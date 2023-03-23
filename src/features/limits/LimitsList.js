@@ -10,7 +10,7 @@ export default function LimitsList() {
   const categoriesWithLimits = categories.filter((cat) => cat.limit > 0);
 
   const limits = categoriesWithLimits.map((cat, index) => (
-    <LimitsListItem key={cat.id} item={cat} isOpen={Boolean(!index)} />
+    <LimitsListItem key={cat.id} item={cat} />
   ));
 
   return <List sx={{ my: '2rem' }}>{limits}</List>;

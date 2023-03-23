@@ -1,5 +1,3 @@
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-
 import { useSelector } from 'react-redux';
 
 import CategoriesList from '../features/categories/CategoriesList';
@@ -11,9 +9,9 @@ export default function CategoriesPage() {
   const expense = categories.filter((cat) => cat.type === 'expense');
 
   return (
-    <Grid2 container flexDirection='column' textAlign='center'>
+    <>
       <CategoriesList title='Income' categories={income} />
       <CategoriesList title='Expenses' categories={expense} />
-    </Grid2>
+    </>
   );
 }
