@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/expenses-and-income-control-app/static/css/main.38d482d1.css",
+    "main.js": "/expenses-and-income-control-app/static/js/main.41380c02.js",
+    "index.html": "/expenses-and-income-control-app/index.html",
+    "main.38d482d1.css.map": "/expenses-and-income-control-app/static/css/main.38d482d1.css.map",
+    "main.41380c02.js.map": "/expenses-and-income-control-app/static/js/main.41380c02.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38d482d1.css",
+    "static/js/main.41380c02.js"
+  ]
+}
