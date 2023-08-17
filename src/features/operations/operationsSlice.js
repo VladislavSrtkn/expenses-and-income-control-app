@@ -29,7 +29,7 @@ function removeOperation(id) {
 
 const operationsSlice = createSlice({
   name: 'operations',
-  initialState,
+  initialState: initialState,
   reducers: {
     operationsChanged(state) {
       state.entities = getOperationsFromStorage();

@@ -1,4 +1,8 @@
 export const currencies = {
+  rub: {
+    label: '₽',
+    name: 'rub',
+  },
   usd: {
     label: '$',
     name: 'usd',
@@ -18,9 +22,5 @@ export const currencies = {
   jpy: {
     label: '¥',
     name: 'jpy',
-  },
-  uah: {
-    label: '₴',
-    name: 'uah',
   },
 };
